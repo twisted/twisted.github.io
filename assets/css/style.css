@@ -1,0 +1,66 @@
+section {
+  padding: 3rem 0;
+}
+
+.bd-clipboard {
+   position: relative;
+   display: block;
+   float: right;
+}
+ .bd-clipboard + pre {
+   margin-top: 0;
+}
+ .btn-clipboard {
+   position: absolute;
+   top: 1.65rem;
+   right: 0.65rem;
+   z-index: 10;
+   display: block;
+   padding: 0.25rem 0.5rem;
+   color: #818a91;
+   background-color: transparent;
+   border: 1px solid;
+   border-radius: 0.25rem;
+}
+
+.btn-clipboard:hover {
+  color: #fff;
+  background-color: #027de7;
+}
+
+.icon-round {
+  flex-shrink: 0;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-round > .icon {
+  font-size:  2rem; }
+.icon-round.bg-primary {
+  background: rgba(56, 134, 89, 0.2) !important; }
+.icon-round.bg-primary-2 {
+  background: rgba(34, 85, 96, 0.1) !important; }
+.icon-round.bg-primary-3 {
+  background: rgba(4, 3, 3, 0.1) !important; }
+.icon-round.bg-white {
+  background: rgba(255, 255, 255, 0.1) !important; }
+
+.btn.back-to-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1020;
+}
+
+.btn-round {
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
