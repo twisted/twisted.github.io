@@ -14,11 +14,13 @@
   <body>
     <header>
       <div class="navbar-container">
-        <nav class="navbar navbar-expand-lg justify-content-between navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg justify-content-between navbar-dark bg-dark text-light">
           <div class="container">
             <div class="col flex-fill px-0 d-flex justify-content-between">
               <a class="navbar-brand " href="/" title="Twisted">
-                <img src="assets/images/logo.png"  alt="Twisted" class=""/>
+                <img src="assets/images/logo.png" alt="Twisted" class="d-none d-md-block"/>
+                <img src="assets/images/twisted-logo.svg" alt="Twisted" class="d-inline d-md-none"/>
+                <h2 class="d-inline d-md-none text-light">Twisted</h2>
               </a>
 
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,16 +31,16 @@
             <div class="collapse navbar-collapse">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/trac/wiki">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">FAQ</a>
+                  <a class="nav-link" href="/trac/wiki/FrequentlyAskedQuestions">FAQ</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Docs</a>
+                  <a class="nav-link" href="/trac/wiki/Documentation">Docs</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Download</a>
+                  <a class="nav-link" href="/trac/wiki/Downloads">Download</a>
                 </li>
               </ul>
             </div>
@@ -48,114 +50,54 @@
       </div>
     </header>
 
-    <section>
+    <section class="pb-0">
       <div class="container">
-        <div class="row justify-content-center text-center mb-6">
+        <div class="row justify-content-center text-center mb-2">
           <div class="col-xl-8 col-lg-9 col-md-10">
             <h1>An event-driven networking engine written in Python </h1>
             <p class="lead">Licensed under the open source MIT License</p>
             <p class="text-muted">It supports CPython 3.6+ and PyPy3.</p>
-            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center align-items-sm-start mt-5">
+            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center align-items-sm-start mt-1">
               <div class="d-flex flex-column mx-1 text-center">
-                <a href="#" class="btn btn-lg btn-primary mb-2">
+                <a href="#" class="btn btn-lg btn-outline-dark mb-2">
                   <i class="bi bi-github"></i>
                   <span>View on Github</span>
                 </a>
-                <a href="#" class="small">View Documentation <i class="bi bi-arrow-right-short"></i></a>
+                <a href="https://twistedmatrix.com/trac/wiki/Documentation" class="small">View Documentation <i class="bi bi-arrow-right-short"></i></a>
               </div>
-              <a href="#" class="mx-1 btn btn-lg btn-dark mt-3 mt-sm-0">Download</a>
+              <a href="/trac/wiki/Downloads" class="mx-1 btn btn-lg btn-primary text-white mt-3 mt-sm-0">Download</a>
             </div>
           </div>
         </div>
 
         <div class="row justify-content-center">
           <div class="col-xl-8 col-lg-9">
-            <div class="rounded bg-dark p-4 text-light text-monospace shadow layer-2">
-              <ul class="list-unstyled">
-                <li>
-                    $ virtualenv try-twisted
-                 </li>
-                 <li>
-                    $ . try-twisted/bin/activate
-                 </li>
-                 <li>
-                  $ pip install twisted[tls]
-                 </li>
-                 <li>
-                    $ twist --help
-                </li>
-              </ul>
-              </div>
+            <div>
+            <pre>
+              <code class="bg-dark text-light rounded language-bash">
+                $ virtualenv try-twisted
+                $ . try-twisted/bin/activate
+                $ pip install twisted[tls]
+                $ twist --help
+              </code>
+            </pre>
             </div>
-            <!-- <div class="decoration bottom right" >
-              <img class="bg-primary" src="assets/img/decorations/deco-blob-2.svg" alt="deco-blob-2 decoration" data-inject-svg />
-            </div> -->
-          </div>
-        </div>
-    </section>
+            <p>
+              <a href="https://github.com/twisted/twisted/releases/tag/twisted-21.2.0">Twisted 21.2.0</a> was the last version with Python 3.5 support.
+            </p>
+            <p>
+              <a href="https://labs.twistedmatrix.com/2020/03/twisted-drops-python-27-support.html" >Twisted 20.3.0</a> was the last version with Python 2.7 and PyPy2 support.
+            </p>
 
-    <section class="pt-0">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-xl-11">
-            <div class="row">
-              <div class="col-md-6 d-flex mb-4" >
-                <div class="icon-round bg-primary mr-3">
-                  <i class="icon bi bi-github text-primary"></i>
-                </div>
-                <div>
-                  <h4 class="mb-2">See our code on Github</h4>
-                  <p class="lead pr-xl-4">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
-                </div>
-              </div>
-              <div class="col-md-6 d-flex mb-4">
-                <div class="icon-round bg-primary mr-3">
-                  <i class="icon bi bi-twitter text-primary"></i>
-                </div>
-                <div>
-                  <h4 class="mb-2">Follow us on Twitter</h4>
-                  <p class="lead pr-xl-4">Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-              </div>
-              <div class="col-md-6 d-flex mb-4">
-                <div class="icon-round bg-primary mr-3">
-                  <i class="icon bi bi-journal-bookmark text-primary"></i>
-                </div>
-                <div>
-                  <h4 class="mb-2">Read our blog</h4>
-                  <p class="lead pr-xl-4">Amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-              </div>
-              <div class="col-md-6 d-flex mb-4">
-                <div class="icon-round bg-primary mr-3">
-                  <i class="icon bi bi-shield-lock-fill text-primary"></i>
-                </div>
-                <div>
-                  <h4 class="mb-2">Report a security issue</h4>
-                  <p class="lead pr-xl-4">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col text-center">
-            <a href="#" class="lead hover-arrow">Explore all features <i class="bi bi-arrow-right-short"></i></a>
-          </div>
+
         </div>
       </div>
     </section>
 
-    <section class="bg-primary-alt has-divider">
-      <div class="container pb-0">
-        <div class="row justify-content-center text-center mb-6">
-          <div class="col-xl-8 col-lg-9">
-            <h2 class="display-4 mx-xl-6">Code examples</h2>
-            <p class="lead">
-              See code
-            </p>
-          </div>
-        </div>
+
+    <section class="has-divider">
+      <div class="container">
         <div class="row justify-content-center">
           <div class="col">
             <nav>
@@ -300,11 +242,16 @@
                   </code>
                 </pre>
                 <p>
-Give this a try, supplying your IMAP4 username, app password (<a class="ext-link" href="https://support.google.com/accounts/answer/185833?hl=en"><span class="icon">​</span>generate one for gmail</a>, <a class="ext-link" href="https://www.fastmail.com/help/clients/apppassword.html"><span class="icon">​</span>generate one for fastmail</a>), and <a class="ext-link" href="https://twistedmatrix.com/documents/current/core/howto/endpoints.html#auto7"><span class="icon">​</span>client endpoint description</a> for your IMAP4 server.  You'll see the subject of the first message in your mailbox printed.
-</p>
-<p>
-See the <a class="wiki" href="/trac/wiki/TwistedMail">TwistedMail</a> documentation for more information.
-</p>
+                  Give this a try, supplying your IMAP4 username, app password (
+                  <a class="ext-link" href="https://support.google.com/accounts/answer/185833?hl=en">generate one for gmail</a>,
+                  <a class="ext-link" href="https://www.fastmail.com/help/clients/apppassword.html">generate one for fastmail</a>), and
+                  <a class="ext-link" href="https://twistedmatrix.com/documents/current/core/howto/endpoints.html#auto7">
+                    client endpoint description</a>
+                    for your IMAP4 server.  You'll see the subject of the first message in your mailbox printed.
+                  </p>
+                  <p>
+                  See the <a class="wiki" href="/trac/wiki/TwistedMail">TwistedMail</a> documentation for more information.
+                  </p>
               </div>
               <div class="tab-pane fade" id="nav-ssh" role="tabpanel" aria-labelledby="nav-ssh-tab">
                 <p>
@@ -348,69 +295,77 @@ See the <a class="wiki" href="/trac/wiki/TwistedMail">TwistedMail</a> documentat
         </div>
       </div>
       <div class="divider">
-        <img class="bg-primary-3" src="assets/img/dividers/divider-1.svg" alt="divider graphic" data-inject-svg />
+        <img class="bg-dark" src="assets/images/divider-2.svg" alt="divider graphic" data-inject-svg />
       </div>
     </section>
 
     <section class="bg-dark text-light mb-lg-n7">
+
       <div class="container pb-md-6">
         <div class="row mb-4">
           <div class="col">
-            <h2 class="h1">Premium Features</h2>
+            <h1>About Twisted</h1>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4 d-flex mb-4">
-            <i class="icon bi bi-github"></i>
-            <div class="ml-3">
-              <h5>Payment Processing</h5>
+            <i class="icon bi bi-puzzle"></i>
+            <div class="ml-2">
+              <h3>More Protocols</h3>
               <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.
+                Twisted also supports many common network protocols, including SMTP, POP3, IMAP, SSHv2, and DNS.
+                </p>
+                <p>For more information see our
+                <a class="wiki" href="/trac/wiki/Documentation">documentation</a> and
+                <a class="ext-link" href="https://twistedmatrix.com/documents/current/api/">API reference</a>.
               </p>
             </div>
           </div>
           <div class="col-md-4 d-flex mb-4">
-            <i class="icon bi bi-github"></i>
-            <div class="ml-3">
-              <h5>Advanced API</h5>
+            <i class="icon bi bi-people-fill"></i>
+            <div class="ml-2">
+              <h3>Community</h3>
               <p>
-                Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Get in touch with the <a class="wiki" href="/trac/wiki/TwistedCommunity">Twisted community</a> through <a class="wiki" href="/trac/wiki/TwistedCommunity#MailLists">email</a>, <a class="ext-link" href="https://stackoverflow.com/questions/tagged/twisted"><span class="bi bi-stackoverflow"></span>Stack Overflow</a> or <a class="wiki" href="/trac/wiki/TwistedCommunity#IRC">IRC</a>.
               </p>
             </div>
           </div>
           <div class="col-md-4 d-flex mb-4">
-            <i class="icon bi bi-github"></i>
-            <div class="ml-3">
-              <h5>Cloud Storage</h5>
+            <i class="icon bi bi-lightbulb-fill"></i>
+            <div class="ml-2">
+              <h3>Contribute</h3>
               <p>
-                Amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Learn about the Twisted <a class="wiki" href="/trac/wiki/TwistedDevelopment">development process</a> and how to <a class="wiki" href="/trac/wiki/ContributingToTwistedLabs">contribute</a>.
+              </p>
+              <p>
+                Help improve Twisted on <a class="wiki" href="/trac/wiki/Windows">Windows</a>!
               </p>
             </div>
           </div>
           <div class="col-md-4 d-flex mb-4">
-            <i class="icon bi bi-github"></i>
-            <div class="ml-3">
-              <h5>Unlimited Collaborators</h5>
-              <p>
-                Amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            <i class="icon bi bi-search"></i>
+            <div class="ml-2">
+              <h3>Wiki</h3>
+               <p>
+                Read about <a class="wiki" href="/trac/wiki/ProjectsUsingTwisted">software using</a> Twisted and their <a class="wiki" href="/trac/wiki/SuccessStories">success stories</a>.
               </p>
             </div>
           </div>
           <div class="col-md-4 d-flex mb-4">
-            <i class="icon bi bi-github"></i>
-            <div class="ml-3">
-              <h5>Analytics API</h5>
+            <i class="icon bi bi-gift-fill"></i>
+            <div class="ml-2">
+              <h3>Sponsors</h3>
               <p>
-                Amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Learn about the <a class="wiki" href="/trac/wiki/TwistedSponsors">individuals and organisations</a> that aid Twisted with donations of hardware, software, hosting and other things.
               </p>
             </div>
           </div>
           <div class="col-md-4 d-flex mb-4">
-            <i class="icon bi bi-github"></i>
-            <div class="ml-3">
-              <h5>White Labelable</h5>
+            <i class="icon bi bi-grid-3x3-gap"></i>
+            <div class="ml-2">
+              <h3>Twisted Matrix Laboratories</h3>
               <p>
-                Amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Find out what <a class="wiki" href="https://twistedmatrix.com/trac/wiki/TwistedMatrixLaboratories">Twisted Matrix Laboratories</a> is.
               </p>
             </div>
           </div>
@@ -418,42 +373,43 @@ See the <a class="wiki" href="/trac/wiki/TwistedMail">TwistedMail</a> documentat
       </div>
     </section>
 
-    <section class="">
+    <section>
       <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="card card-body border-0 o-hidden mb-0 shadow-3d text-light bg-primary">
-              <div class="position-relative d-flex flex-column flex-md-row justify-content-between align-items-center">
-                <div class="text-center mb-md-0">
-                  <h3>Donate to Twisted</h3>
-                  <p class="small">
-                    Donations are tax-deductible.
-                  </p>
+        <div class="row justify-content-center">
+          <div class="col-xl-11">
+            <div class="row">
+              <div class="col-md-6 d-flex mb-4 align-items-center" >
+                <div class="icon-round bg-primary mr-3">
+                  <i class="icon bi bi-github text-primary"></i>
                 </div>
-
-                <div class="donation-button">
-                  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                    <fieldset>
-                      <input name="cmd" value="_s-xclick" type="hidden">
-                      <input name="hosted_button_id" value="ZB3NXPUZHQUKS" type="hidden">
-                      <input name="currency_code" value="USD" type="hidden">
-                      <input name="amount" value="25" type="hidden">
-                      <button type="submit" name="Donate" class="btn btn-lg btn-light">
-                        Donate
-                        <span class="small">(PayPal)</span>
-                      </button>
-
-                    </fieldset>
-                  </form>
+                <div>
+                  <h4>See our code on Github</h4>
+                  <p>See the code <a class="ext-link" href="https://github.com/twisted/twisted"><span class="icon"></span>for Twisted</a> (<a class="ext-link" href="https://github.com/twisted"><span class="icon"></span>and more</a>) on GitHub</p>
                 </div>
-
-                <a href="https://flattr.com/thing/948720/Twisted-the-premier-networking-library-for-the-Python-language" class="btn btn-lg btn-dark">
-                  Donate with flattr
-                </a>
               </div>
-
-              <div class="decoration layer-0">
-                <img class="bg-primary-2" src="assets/img/decorations/deco-blob-1.svg" alt="deco-blob-1 decoration" data-inject-svg />
+              <div class="col-md-6 d-flex mb-4 align-items-center">
+                <div class="icon-round bg-primary mr-3">
+                  <i class="icon bi bi-twitter text-primary"></i>
+                </div>
+                <div>
+                  <h4>Follow us on <a href="https://twitter.com/twistedmatrix">Twitter</a></h4>
+                </div>
+              </div>
+              <div class="col-md-6 d-flex mb-4 align-items-center">
+                <div class="icon-round bg-primary mr-3">
+                  <i class="icon bi bi-journal-bookmark text-primary"></i>
+                </div>
+                <div>
+                  <h4>Read <a href="https://labs.twistedmatrix.com/">our blog</a></h4>
+                </div>
+              </div>
+              <div class="col-md-6 d-flex mb-4 align-items-center">
+                <div class="icon-round bg-primary mr-3">
+                  <i class="icon bi bi-shield-lock-fill text-primary"></i>
+                </div>
+                <div>
+                  <h4>Report a <a href="https://twistedmatrix.com/trac/wiki/Security">security issue</a></h4>
+                </div>
               </div>
             </div>
           </div>
@@ -463,30 +419,76 @@ See the <a class="wiki" href="/trac/wiki/TwistedMail">TwistedMail</a> documentat
 
     <section class="py-0">
       <div class="container">
-        <div class="row text-center mb-5">
+        <div class="row">
+          <div class="col">
+            <div class="card card-body border-0 o-hidden mb-0 shadow-3d text-light bg-primary">
+              <div class="position-relative d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <div class="text-center mb-md-0">
+                  <h1>Donate to Twisted</h1>
+                  <p>
+                    Donations are tax-deductible.
+                  </p>
+                </div>
+
+                <div class="donation-buttons layer-2">
+                  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                    <fieldset>
+                      <input name="cmd" value="_s-xclick" type="hidden">
+                      <input name="hosted_button_id" value="ZB3NXPUZHQUKS" type="hidden">
+                      <input name="currency_code" value="USD" type="hidden">
+                      <input name="amount" value="25" type="hidden">
+                      <button type="submit" name="Donate" class="btn btn-lg btn-light mb-2">
+                        Donate <span class="small">(PayPal)</span>
+                      </button>
+
+                    </fieldset>
+                  </form>
+                  <a href="https://flattr.com/thing/948720/Twisted-the-premier-networking-library-for-the-Python-language"
+                    class="btn btn-lg btn-dark text-white">
+                    Donate <span class="small">(Flattr)</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="decoration middle-x d-none d-lg-block layer-1">
+                <img class="bg-dark" src="assets/images/deco-blob-2.svg" alt="deco-blob-1 decoration" data-inject-svg />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="row text-center">
           <div class="col">
             <h1>Twisted Sponsors</h1>
-            <small class="">Participate in the Twisted Project Sponsorship Program! For Silver Sidewinder and higher-level sponsors, we will display your logo here on the front page for one year.</small>
+            <p>
+              Participate in the <a href="/trac/wiki/TwistedSoftwareFoundation#BenefitsofSponsorship">Twisted Project Sponsorship Program</a>!
+            </p>
+            <p>
+              For <a href="/trac/wiki/TwistedSoftwareFoundation#SponsorshipLevels">Silver Sidewinder and higher-level</a> sponsors, we will display your logo here on the front page for one year.
+            </p>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <ul class="d-flex flex-wrap justify-content-center list-unstyled">
-              <li class="mx-4 mb-md-5">
-                <img class="bg-primary-3 icon icon-md opacity-20" src="assets/images/thinkst.png" />
+              <li class="mx-4">
+                <img src="assets/images/thinkst.png" />
               </li>
-              <li class="mx-4 mb-md-5">
-                <img class="bg-primary-3 icon icon-md opacity-20" src="assets/images/Variomedia-rescaled.png"/>
+              <li class="mx-4">
+                <img src="assets/images/Variomedia-rescaled.png"/>
               </li>
-              <li class="mx-4 mb-md-5">
-                <img class="bg-primary-3 icon icon-md opacity-20" src="assets/images/Atlassian-hipchat-logo.png"/>
+              <li class="mx-4">
+                <img src="assets/images/Atlassian-hipchat-logo.png"/>
               </li>
             </ul>
           </div>
         </div>
       </div>
     </section>
-    <a href="#" class="btn back-to-top btn-primary btn-round float-right bi-arrow-up-circle-fill"></a>
 
     <!-- Required vendor scripts (Do not remove) -->
     <script type="text/javascript" src="assets/js/jquery-v3.5.1.min.js"></script>
@@ -497,13 +499,11 @@ See the <a class="wiki" href="/trac/wiki/TwistedMail">TwistedMail</a> documentat
 
     <script src="assets/js/clipboard.min.js"></script>
     <!-- <script type="text/javascript" src="assets/js/python.min.js"></script> -->
-    <script type="text/javascript" src="assets/js/code.js"></script>
 
     <!-- SVGInjector (replaces img tags with SVG code to allow easy inclusion of SVGs with the benefit of inheriting colors and styles)-->
-    <!-- <script type="text/javascript" src="assets/js/svg-injector.umd.production.js"></script> -->
+    <script type="text/javascript" src="assets/js/svg-inject-v1.2.3.js"></script>
 
-    <!-- Required theme scripts (Do not remove) -->
-    <!-- <script type="text/javascript" src="assets/js/theme.js"></script> -->
+    <script type="text/javascript" src="assets/js/code.js"></script>
 
 
   </body>

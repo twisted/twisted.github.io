@@ -28,3 +28,5 @@ hljs.highlightAll();
   })
 }
 )(jQuery);
+
+SVGInject(document.querySelectorAll('[data-inject-svg]'));
