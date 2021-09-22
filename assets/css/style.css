@@ -62,12 +62,17 @@ section {
   align-items: center;
   justify-content: center;
 }
+
 pre {
   margin-bottom: 0;
 }
-pre code.hljs {
-  padding: 0;
+pre.bash-code {
+  white-space: pre-line;
 }
+pre code.hljs {
+    padding: 1rem;
+}
+
 .tab-pane p:first-of-type {
   margin-top: 1rem;
   margin-bottom: 0;
@@ -87,11 +92,17 @@ pre code.hljs {
 .btn {
   font-weight: 600;
 }
-.text-primary, a {
+.text-primary {
   color: #388659 !important;
 }
+.container a {
+  color: #388659;
+}
 .bg-dark a {
-  color: #2fc36e !important;
+  color: #2fc36e;
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #2fc36e;
 }
 .decoration:not(.position-relative) {
   position: absolute; }
@@ -120,7 +131,6 @@ pre code.hljs {
 svg.bg-primary * {
   fill: #388659;
 }
-
 svg.bg-dark * {
   fill: #343a40;
 }
@@ -154,9 +164,9 @@ section.has-divider {
 .o-hidden {
   overflow: hidden;
 }
-
 .layer-1 {
-  z-index: 1; }
-
+  z-index: 1;
+}
 .layer-2 {
-  z-index: 2; }
+  z-index: 2;
+}

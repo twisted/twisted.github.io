@@ -30,21 +30,23 @@
 
             <div class="collapse navbar-collapse">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="/trac/wiki">Home <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/trac/wiki/FrequentlyAskedQuestions">FAQ</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/trac/wiki/Documentation">Docs</a>
+                  <a class="nav-link" href="https://docs.twistedmatrix.com/">Docs</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/trac/wiki/Downloads">Download</a>
+                  <a class="nav-link" href="https://pypi.org/project/Twisted/">Download</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#donate">Donate</a>
                 </li>
               </ul>
             </div>
-
           </div>
         </nav>
       </div>
@@ -56,25 +58,28 @@
           <div class="col-xl-8 col-lg-9 col-md-10">
             <h1>An event-driven networking engine written in Python </h1>
             <p class="lead">Licensed under the open source MIT License</p>
-            <p class="text-muted">It supports CPython 3.6+ and PyPy3.</p>
-            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center align-items-sm-start mt-1">
-              <div class="d-flex flex-column mx-1 text-center">
-                <a href="#" class="btn btn-lg btn-outline-dark mb-2">
-                  <i class="bi bi-github"></i>
-                  <span>View on Github</span>
-                </a>
-                <a href="https://twistedmatrix.com/trac/wiki/Documentation" class="small">View Documentation <i class="bi bi-arrow-right-short"></i></a>
-              </div>
-              <a href="/trac/wiki/Downloads" class="mx-1 btn btn-lg btn-primary text-white mt-3 mt-sm-0">Download</a>
+
+            <div class="d-flex flex-md-row flex-column justify-content-center align-items-center mb-2">
+              <a href="https://github.com/twisted/twisted" class="btn btn-lg btn-outline-dark mx-2 mb-2 mb-md-0">
+                <i class="bi bi-github"></i>
+                <span>View Github</span>
+              </a>
+              <a href="https://docs.twistedmatrix.com/" class="btn btn-lg btn-primary text-white">
+                View Documentation
+              </a>
             </div>
+            <a href="https://pypi.org/project/Twisted/">
+              Check PyPi download page
+              <i class="bi bi-arrow-right-short"></i>
+            </a>
           </div>
         </div>
 
         <div class="row justify-content-center">
-          <div class="col-xl-8 col-lg-9">
+          <div class="col-xl-4 col-lg-6 col-md-8 col-12">
             <div>
-            <pre>
-              <code class="bg-dark text-light rounded language-bash">
+            <pre class="bash-code">
+              <code class="bg-dark text-light text-left rounded language-bash pt-0">
                 $ virtualenv try-twisted
                 $ . try-twisted/bin/activate
                 $ pip install twisted[tls]
@@ -82,15 +87,7 @@
               </code>
             </pre>
             </div>
-            <p>
-              <a href="https://github.com/twisted/twisted/releases/tag/twisted-21.2.0">Twisted 21.2.0</a> was the last version with Python 3.5 support.
-            </p>
-            <p>
-              <a href="https://labs.twistedmatrix.com/2020/03/twisted-drops-python-27-support.html" >Twisted 20.3.0</a> was the last version with Python 2.7 and PyPy2 support.
-            </p>
-
           </div>
-
         </div>
       </div>
     </section>
@@ -299,9 +296,8 @@
       </div>
     </section>
 
-    <section class="bg-dark text-light mb-lg-n7">
-
-      <div class="container pb-md-6">
+    <section class="bg-dark text-light" id="about">
+      <div class="container">
         <div class="row mb-4">
           <div class="col">
             <h1>About Twisted</h1>
@@ -316,7 +312,7 @@
                 Twisted also supports many common network protocols, including SMTP, POP3, IMAP, SSHv2, and DNS.
                 </p>
                 <p>For more information see our
-                <a class="wiki" href="/trac/wiki/Documentation">documentation</a> and
+                <a class="wiki" href="https://docs.twistedmatrix.com/">documentation</a> and
                 <a class="ext-link" href="https://twistedmatrix.com/documents/current/api/">API reference</a>.
               </p>
             </div>
@@ -378,13 +374,28 @@
         <div class="row justify-content-center">
           <div class="col-xl-11">
             <div class="row">
-              <div class="col-md-6 d-flex mb-4 align-items-center" >
+              <div class="col-md-6 d-flex mb-4" >
                 <div class="icon-round bg-primary mr-3">
                   <i class="icon bi bi-github text-primary"></i>
                 </div>
                 <div>
                   <h4>See our code on Github</h4>
                   <p>See the code <a class="ext-link" href="https://github.com/twisted/twisted"><span class="icon"></span>for Twisted</a> (<a class="ext-link" href="https://github.com/twisted"><span class="icon"></span>and more</a>) on GitHub</p>
+                </div>
+              </div>
+              <div class="col-md-6 d-flex mb-4">
+                <div class="icon-round bg-primary mr-3">
+                  <i class="icon bi bi-shield-check text-primary"></i>
+                </div>
+                <div>
+                  <h4>Supported Python</h4>
+                  <p class="mb-0">It supports CPython 3.6+ and PyPy3.</p>
+                  <p class="mb-0">
+                    <a href="https://github.com/twisted/twisted/releases/tag/twisted-21.2.0">Twisted 21.2.0</a> was the last version with Python 3.5 support.
+                  </p>
+                  <p class="mb-0">
+                    <a href="https://labs.twistedmatrix.com/2020/03/twisted-drops-python-27-support.html" >Twisted 20.3.0</a> was the last version with Python 2.7 and PyPy2 support.
+                  </p>
                 </div>
               </div>
               <div class="col-md-6 d-flex mb-4 align-items-center">
@@ -395,14 +406,7 @@
                   <h4>Follow us on <a href="https://twitter.com/twistedmatrix">Twitter</a></h4>
                 </div>
               </div>
-              <div class="col-md-6 d-flex mb-4 align-items-center">
-                <div class="icon-round bg-primary mr-3">
-                  <i class="icon bi bi-journal-bookmark text-primary"></i>
-                </div>
-                <div>
-                  <h4>Read <a href="https://labs.twistedmatrix.com/">our blog</a></h4>
-                </div>
-              </div>
+
               <div class="col-md-6 d-flex mb-4 align-items-center">
                 <div class="icon-round bg-primary mr-3">
                   <i class="icon bi bi-shield-lock-fill text-primary"></i>
@@ -411,13 +415,29 @@
                   <h4>Report a <a href="https://twistedmatrix.com/trac/wiki/Security">security issue</a></h4>
                 </div>
               </div>
+              <div class="col-md-6 d-flex mb-4 align-items-center">
+                <div class="icon-round bg-primary mr-3">
+                  <i class="icon bi bi-stack text-primary"></i>
+                </div>
+                <div>
+                  <h4>Ask on <a href="https://stackoverflow.com/questions/tagged/twisted">Stack Overflow</a></h4>
+                </div>
+              </div>
+              <div class="col-md-6 d-flex mb-4 align-items-center">
+                <div class="icon-round bg-primary mr-3">
+                  <i class="icon bi bi-envelope-open text-primary"></i>
+                </div>
+                <div>
+                  <h4>Join the <a href="https://mail.python.org/mailman3/lists/twisted.python.org/">discussion list</a></h4>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="py-0">
+    <section class="py-0" id="donate">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -426,11 +446,12 @@
                 <div class="text-center mb-md-0">
                   <h1>Donate to Twisted</h1>
                   <p>
-                    Donations are tax-deductible.
+                    Donations are
+                    <a href="https://twistedmatrix.com/trac/wiki/TwistedSoftwareFoundation#Background" class="text-dark">tax-deductible</a>.
                   </p>
                 </div>
 
-                <div class="donation-buttons layer-2">
+                <div class="donation-buttons layer-2 text-center">
                   <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
                     <fieldset>
                       <input name="cmd" value="_s-xclick" type="hidden">
@@ -440,7 +461,6 @@
                       <button type="submit" name="Donate" class="btn btn-lg btn-light mb-2">
                         Donate <span class="small">(PayPal)</span>
                       </button>
-
                     </fieldset>
                   </form>
                   <a href="https://flattr.com/thing/948720/Twisted-the-premier-networking-library-for-the-Python-language"
