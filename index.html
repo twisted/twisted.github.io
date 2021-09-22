@@ -115,18 +115,18 @@
                 </p>
                 <pre>
                   <code class="language-python" id="server">
-                    from twisted.internet import protocol, reactor, endpoints
+from twisted.internet import protocol, reactor, endpoints
 
-                    class Echo(protocol.Protocol):
-                        def dataReceived(self, data):
-                            self.transport.write(data)
+class Echo(protocol.Protocol):
+    def dataReceived(self, data):
+        self.transport.write(data)
 
-                    class EchoFactory(protocol.Factory):
-                        def buildProtocol(self, addr):
-                            return Echo()
+class EchoFactory(protocol.Factory):
+    def buildProtocol(self, addr):
+        return Echo()
 
-                    endpoints.serverFromString(reactor, "tcp:1234").listen(EchoFactory())
-                    reactor.run()
+endpoints.serverFromString(reactor, "tcp:1234").listen(EchoFactory())
+reactor.run()
                   </code>
                 </pre>
                 <p>
@@ -143,21 +143,21 @@
                 </p>
                 <pre>
                   <code class="language-python">
-                    from twisted.web import server, resource
-                    from twisted.internet import reactor, endpoints
+from twisted.web import server, resource
+from twisted.internet import reactor, endpoints
 
-                    class Counter(resource.Resource):
-                        isLeaf = True
-                        numberRequests = 0
+class Counter(resource.Resource):
+    isLeaf = True
+    numberRequests = 0
 
-                        def render_GET(self, request):
-                            self.numberRequests += 1
-                            request.setHeader(b"content-type", b"text/plain")
-                            content = u"I am request #{}\n".format(self.numberRequests)
-                            return content.encode("ascii")
+    def render_GET(self, request):
+        self.numberRequests += 1
+        request.setHeader(b"content-type", b"text/plain")
+        content = u"I am request #{}\n".format(self.numberRequests)
+        return content.encode("ascii")
 
-                    endpoints.serverFromString(reactor, "tcp:8080").listen(server.Site(Counter()))
-                    reactor.run()
+endpoints.serverFromString(reactor, "tcp:8080").listen(server.Site(Counter()))
+reactor.run()
                 </code>
                 </pre>
                 <p>
@@ -174,33 +174,33 @@
                 </p>
                 <pre>
                   <code class="language-python">
-                    from twisted.internet import reactor, protocol, endpoints
-                    from twisted.protocols import basic
+from twisted.internet import reactor, protocol, endpoints
+from twisted.protocols import basic
 
-                    class PubProtocol(basic.LineReceiver):
-                        def __init__(self, factory):
-                            self.factory = factory
+class PubProtocol(basic.LineReceiver):
+    def __init__(self, factory):
+        self.factory = factory
 
-                        def connectionMade(self):
-                            self.factory.clients.add(self)
+    def connectionMade(self):
+        self.factory.clients.add(self)
 
-                        def connectionLost(self, reason):
-                            self.factory.clients.remove(self)
+    def connectionLost(self, reason):
+        self.factory.clients.remove(self)
 
-                        def lineReceived(self, line):
-                            for c in self.factory.clients:
-                                source = u"<{}> ".format(self.transport.getHost()).encode("ascii")
-                                c.sendLine(source + line)
+    def lineReceived(self, line):
+        for c in self.factory.clients:
+            source = u"<{}> ".format(self.transport.getHost()).encode("ascii")
+            c.sendLine(source + line)
 
-                    class PubFactory(protocol.Factory):
-                        def __init__(self):
-                            self.clients = set()
+class PubFactory(protocol.Factory):
+    def __init__(self):
+        self.clients = set()
 
-                        def buildProtocol(self, addr):
-                            return PubProtocol(self)
+    def buildProtocol(self, addr):
+        return PubProtocol(self)
 
-                    endpoints.serverFromString(reactor, "tcp:1025").listen(PubFactory())
-                    reactor.run()
+endpoints.serverFromString(reactor, "tcp:1025").listen(PubFactory())
+reactor.run()
                   </code>
                 </pre>
                 <p>
@@ -213,31 +213,31 @@
                 </p>
                 <pre>
                   <code class="language-python">
-                    import sys
+import sys
 
-                    from twisted.internet import protocol, defer, endpoints, task
-                    from twisted.mail import imap4
-                    from twisted.python import failure
-
-
-                    async def main(
-                        reactor, username="alice", password="secret", strport="tls:example.com:993"
-                    ):
-                        endpoint = endpoints.clientFromString(reactor, strport)
-                        factory = protocol.Factory.forProtocol(imap4.IMAP4Client)
-                        try:
-                            client = await endpoint.connect(factory)
-                            await client.login(username.encode("utf-8"),
-                                               password.encode("utf-8"))
-                            await client.select("INBOX")
-                            info = await client.fetchEnvelope(imap4.MessageSet(1))
-                            print("First message subject:", info[1]["ENVELOPE"][1])
-                        except:
-                            print("IMAP4 client interaction failed")
-                            print(failure.Failure().getTraceback())
+from twisted.internet import protocol, defer, endpoints, task
+from twisted.mail import imap4
+from twisted.python import failure
 
 
-                    task.react(lambda *a, **k: defer.ensureDeferred(main(*a, **k)), sys.argv[1:])
+async def main(
+    reactor, username="alice", password="secret", strport="tls:example.com:993"
+):
+    endpoint = endpoints.clientFromString(reactor, strport)
+    factory = protocol.Factory.forProtocol(imap4.IMAP4Client)
+    try:
+        client = await endpoint.connect(factory)
+        await client.login(username.encode("utf-8"),
+                           password.encode("utf-8"))
+        await client.select("INBOX")
+        info = await client.fetchEnvelope(imap4.MessageSet(1))
+        print("First message subject:", info[1]["ENVELOPE"][1])
+    except:
+        print("IMAP4 client interaction failed")
+        print(failure.Failure().getTraceback())
+
+
+task.react(lambda *a, **k: defer.ensureDeferred(main(*a, **k)), sys.argv[1:])
                   </code>
                 </pre>
                 <p>
@@ -258,31 +258,31 @@
                 </p>
                 <pre>
                   <code class="language-python">
-                    import sys, os
+import sys, os
 
-                    from twisted.internet import protocol, defer, endpoints, task
-                    from twisted.conch.endpoints import SSHCommandClientEndpoint
+from twisted.internet import protocol, defer, endpoints, task
+from twisted.conch.endpoints import SSHCommandClientEndpoint
 
-                    async def main(reactor, username="alice", sshhost="example.com", portno="22"):
-                        envAgent = endpoints.UNIXClientEndpoint(reactor, os.environ["SSH_AUTH_SOCK"])
-                        endpoint = SSHCommandClientEndpoint.newConnection(
-                            reactor, "echo 'hello world'", username, sshhost,
-                            int(portno), agentEndpoint=envAgent,
-                        )
+async def main(reactor, username="alice", sshhost="example.com", portno="22"):
+    envAgent = endpoints.UNIXClientEndpoint(reactor, os.environ["SSH_AUTH_SOCK"])
+    endpoint = SSHCommandClientEndpoint.newConnection(
+        reactor, "echo 'hello world'", username, sshhost,
+        int(portno), agentEndpoint=envAgent,
+    )
 
-                        class ShowOutput(protocol.Protocol):
-                            received = b""
-                            def dataReceived(self, data):
-                                self.received += data
-                            def connectionLost(self, reason):
-                                finished.callback(self.received)
+    class ShowOutput(protocol.Protocol):
+        received = b""
+        def dataReceived(self, data):
+            self.received += data
+        def connectionLost(self, reason):
+            finished.callback(self.received)
 
-                        finished = defer.Deferred()
-                        factory = protocol.Factory.forProtocol(ShowOutput)
-                        await endpoint.connect(factory)
-                        print("SSH response:", await finished)
+    finished = defer.Deferred()
+    factory = protocol.Factory.forProtocol(ShowOutput)
+    await endpoint.connect(factory)
+    print("SSH response:", await finished)
 
-                    task.react(lambda *a, **k: defer.ensureDeferred(main(*a, **k)), sys.argv[1:])
+task.react(lambda *a, **k: defer.ensureDeferred(main(*a, **k)), sys.argv[1:])
                   </code>
                 </pre>
                 <p>
