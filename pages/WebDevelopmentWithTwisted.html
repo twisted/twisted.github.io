@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>Test Twisted Trac Wiki - Web Development with Twisted</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+
+        <meta name="Description" content="An event-driven networking engine written in Python and MIT licensed." />
+
+        <link rel="stylesheet" type="text/css" href="https://twisted.org/theme/css/twistedtrac.css" />
+
+
+</head>
+
+<body>
+        <div id="banner">
+                <div id="top_grad"></div>
+                <div id="tab">
+                        <a href="https://twistedmatrix.com/trac/wiki">HOME</a>
+                        <a href="https://twistedmatrix.com/trac/wiki/FrequentlyAskedQuestions">FAQ</a>
+                        <a href="/">DOCS</a>
+                        <a href="https://twistedmatrix.com/trac/wiki/Downloads">DOWNLOAD</a>
+                </div>
+
+                <div id="header">
+                        <a id="logo" href="https://twisted.org/"><img src="https://twisted.org/theme/images/trac_banner.png" alt="Twisted" /></a>
+                </div>
+        </div>
+
+<div id="mainnav" class="related">
+	<ul>
+		<li><a href="https://twisted.org">Twisted 21.2.0 documentation</a> »</li>
+	</ul>
+</div>
+        <div id="ctxtnav" class="nav">
+        </div>
+
+    <section>
+
+    <div class="document">
+        <div class="documentwrapper">
+        <div class="bodywrapper">
+        <h1>Web Development with Twisted</h1>
+        
+        <div class="entry-content">
+        <p>There are a number of packages in and around Twisted that do things with the web:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://twistedmatrix.com/documents/current/web/">Twisted Web</a> provides a simple, stable HTTP server, suitable for all types of web apps and web services. It provides a flexible resource publishing API, and implements HTTP 1.0 with some 1.1 features.  <strong>Twisted Web is extremely stable.</strong></li>
+<li><a class="reference external" href="https://launchpad.net/divmod.org">Divmod Nevow</a> is a templating toolkit that provides its own resource model and simple application server API.  It requires Twisted, is fully integrated with the Twisted reactor, provides mechanisms for asynchronous page rendering, and an event-driven <a class="reference external" href="http://en.wikipedia.org/wiki/COMET_(programming)">COMET</a> /AJAX implementation called <a class="reference external" href="http://divmod.readthedocs.org/en/latest/products/nevow/athena/index.html">&quot;Nevow Athena&quot;</a>.  Nevow uses Twisted Web, but provides its own request objects and resource model on top of it.</li>
+<li><a class="reference external" href="https://launchpad.net/divmod.org">Divmod Mantissa</a> is a full-featured multi-protocol application server, with a built-in object database, authentication model based on Twisted Cred, a capability-based security model, and many more features.  It integrates Nevow (and therefore Twisted Web) and a number of other Twisted-related technologies to provide a full-featured system.</li>
+</ul>
+<div class="section" id="so-you-want-to-be-a-web-developer">
+<h2>So You Want To Be A Web Developer</h2>
+<p>Having reviewed this list, the obvious question is, <em>which of these tools should I use for my application???</em>  The short answer is: &quot;It depends.&quot;</p>
+<p>You can always ask about these kinds of issues on the <a class="reference external" href="http://twistedmatrix.com/cgi-bin/mailman/listinfo/twisted-web">Twisted Web mailing list</a>, but here's a cheat-sheet that you may want to read in advance, listing some of the things that you might want to be doing with Twisted and the consensus as to the correct (or multiple possible correct) solutions for each case.</p>
+<div class="section" id="i-want-a-container-for-my-wsgi-application">
+<h3>I want a container for my WSGI application</h3>
+<p>In this case, <strong>use the Twisted Web (8.2 or newer) WSGI module</strong> (<tt class="docutils literal">twistd web <span class="pre">--wsgi=application</span></tt>).</p>
+</div>
+<div class="section" id="i-want-a-web-ui-for-my-existing-twisted-networking-application">
+<h3>I want a web UI for my existing Twisted networking application</h3>
+<p>Assuming that your networking application has its own data persistence, or does not require persistence, and needs a web-based control panel or monitoring UI, you probably want to <strong>use Nevow</strong>  Nevow provides backwards compatibility between releases (as does Twisted Web, on which it is built), just like all Twisted projects.  It also provides a templating system  which makes implementing user interfaces that integrate with the event loop much easier than coding directly to the Twisted Web API.  Nevow also has support for the AJAX and COMET, via Nevow Athena.  Athena lets you take advantage of the event loop on multiple levels; you can push events from network triggers straight out to a web page.</p>
+</div>
+<div class="section" id="i-want-to-write-a-rest-ws-interface-to-my-twisted-application">
+<h3>I want to write a REST / WS-* interface to my Twisted application</h3>
+<p>In this case your best bet is to <strong>use Twisted Web</strong> directly.  You won't need XHTML templating, so Nevow buys you little extra.</p>
+<p>Twisted Web already has basic support for XMLRPC and SOAP, and it is fairly straightforward to set up a web service.  Twisted Web also provides various facilities for being set up behind a reverse-proxy, which is the suggested mechanism to integrate your Twisted application with an existing site.</p>
+</div>
+<div class="section" id="i-want-a-web-framework">
+<h3>I Want a Web Framework</h3>
+<p>AKA</p>
+<div class="section" id="i-want-to-write-a-wiki">
+<h4>I want to write a Wiki</h4>
+</div>
+<div class="section" id="i-want-to-write-a-blog">
+<h4>I want to write a blog</h4>
+</div>
+<div class="section" id="i-want-something-to-compare-to-flask-or-django-or-ruby-on-rails">
+<h4>I want something to compare to Flask or Django or Ruby on Rails</h4>
+<p>The short version is that this is more complicated in Twisted than in other tools at the moment.  Sadly, you aren't going to find a straight-up competitor  with the sort of polished web presence and easy instant integration with your SQL database and existing environment that the aforementioned products offer.</p>
+<p><a class="reference external" href="https://launchpad.net/divmod.org">Divmod Mantissa</a> is a full-featured Twisted-powered application server and will likely appeal to you if you want an integrated database and other high-level framework support.</p>
+</div>
+</div>
+</div>
+
+        </div>
+        </div>
+        </div>
+<div class="sphinxsidebar">
+<div class="sphinxsidebarwrapper">
+</div>
+</div>    </div>
+
+    </section>
+
+        <div id="footer"><hr>
+                <div> </div>
+                <p class="left2">
+        Copyright 2021, Twisted Matrix Labs. Ver 21.2.0. Built on 2021-02-28.<br />
+        Site design<br />
+        By <a href="http://huw.ugbox.net/">huw.wilkins.</a>
+
+                </p>
+                <p class="right"></p>
+        </div>
+
+
+</body>
+</html>
