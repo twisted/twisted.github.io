@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>Test Twisted Trac Wiki - Building Twisted on Windows</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+
+        <meta name="Description" content="An event-driven networking engine written in Python and MIT licensed." />
+
+        <link rel="stylesheet" type="text/css" href="https://twisted.org/theme/css/twistedtrac.css" />
+
+
+</head>
+
+<body>
+        <div id="banner">
+                <div id="top_grad"></div>
+                <div id="tab">
+                        <a href="https://twistedmatrix.com/trac/wiki">HOME</a>
+                        <a href="https://twistedmatrix.com/trac/wiki/FrequentlyAskedQuestions">FAQ</a>
+                        <a href="/">DOCS</a>
+                        <a href="https://twistedmatrix.com/trac/wiki/Downloads">DOWNLOAD</a>
+                </div>
+
+                <div id="header">
+                        <a id="logo" href="https://twisted.org/"><img src="https://twisted.org/theme/images/trac_banner.png" alt="Twisted" /></a>
+                </div>
+        </div>
+
+<div id="mainnav" class="related">
+	<ul>
+		<li><a href="https://twisted.org">Twisted 21.2.0 documentation</a> »</li>
+	</ul>
+</div>
+        <div id="ctxtnav" class="nav">
+        </div>
+
+    <section>
+
+    <div class="document">
+        <div class="documentwrapper">
+        <div class="bodywrapper">
+        <h1>Building Twisted on Windows</h1>
+        
+        <div class="entry-content">
+        <p>This contains information for building Twisted on Windows</p>
+<div class="section" id="installation-requirements">
+<h2>Installation requirements</h2>
+<p>You will need a standard Python 3 dev environment. See the official documentation at <a class="reference external" href="https://docs.python.org/3/using/windows.html">https://docs.python.org/3/using/windows.html</a></p>
+<p>Download Visual Studio Installer and get the following components for C++ build tools (might use newer versions):</p>
+<ul class="simple">
+<li>MSVC v142 - VS 2019 C++ build tools</li>
+<li>Windows 10 SDK</li>
+</ul>
+<p>You can get Python 3 via nuget.</p>
+<p>Also get Git for Windows.</p>
+</div>
+<div class="section" id="dev-process">
+<h2>Dev process</h2>
+<p>Make sure pip script is installed with <tt class="docutils literal">python <span class="pre">-m</span> pip install <span class="pre">-U</span> pip</tt> as the default python might be created with only the pip module and without the pip script.</p>
+<p>Then you can do the standard <tt class="docutils literal">pip install <span class="pre">-e</span> .[dev]</tt></p>
+</div>
+
+        </div>
+        </div>
+        </div>
+<div class="sphinxsidebar">
+<div class="sphinxsidebarwrapper">
+</div>
+</div>    </div>
+
+    </section>
+
+        <div id="footer"><hr>
+                <div> </div>
+                <p class="left2">
+        Copyright 2021, Twisted Matrix Labs. Ver 21.2.0. Built on 2021-02-28.<br />
+        Site design<br />
+        By <a href="http://huw.ugbox.net/">huw.wilkins.</a>
+
+                </p>
+                <p class="right"></p>
+        </div>
+
+
+</body>
+</html>

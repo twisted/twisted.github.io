@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>Test Twisted Trac Wiki - Twisted Development</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+
+        <meta name="Description" content="An event-driven networking engine written in Python and MIT licensed." />
+
+        <link rel="stylesheet" type="text/css" href="https://twisted.org/theme/css/twistedtrac.css" />
+
+
+</head>
+
+<body>
+        <div id="banner">
+                <div id="top_grad"></div>
+                <div id="tab">
+                        <a href="https://twistedmatrix.com/trac/wiki">HOME</a>
+                        <a href="https://twistedmatrix.com/trac/wiki/FrequentlyAskedQuestions">FAQ</a>
+                        <a href="/">DOCS</a>
+                        <a href="https://twistedmatrix.com/trac/wiki/Downloads">DOWNLOAD</a>
+                </div>
+
+                <div id="header">
+                        <a id="logo" href="https://twisted.org/"><img src="https://twisted.org/theme/images/trac_banner.png" alt="Twisted" /></a>
+                </div>
+        </div>
+
+<div id="mainnav" class="related">
+	<ul>
+		<li><a href="https://twisted.org">Twisted 21.2.0 documentation</a> »</li>
+	</ul>
+</div>
+        <div id="ctxtnav" class="nav">
+        </div>
+
+    <section>
+
+    <div class="document">
+        <div class="documentwrapper">
+        <div class="bodywrapper">
+        <h1>Twisted Development</h1>
+        
+        <div class="entry-content">
+        <p><a class="reference external" href="https://twisted.org/pages/ContributingToTwisted.html">Contribute</a> &gt; Twisted Development</p>
+<div class="section" id="contributing">
+<h2>Contributing</h2>
+<p>Twisted uses the <a class="reference external" href="https://twisted.org/pages/UltimateQualityDevelopmentSystem.html">The Ultimate Quality Development System</a>, in addition to this ReviewProcess.</p>
+<p>If you want to become a developer, it is important to understand that all your contributions (including those initial patches you send to the bug tracker) will have to be licenced under the <a class="reference external" href="https://opensource.org/licenses/mit-license.php">MIT License</a>.</p>
+</div>
+<div class="section" id="getting-the-source-code">
+<span id="gettingthesourcecode"></span><h2>Getting the source code</h2>
+<p>You can get Twisted's source code here:</p>
+<p><tt class="docutils literal">git clone <span class="pre">https://github.com/twisted/twisted.git</span> Twisted</tt></p>
+<p>If you intend to contribute to Twisted via Git, but do not have write access to the Twisted repository, you should instead fork the project by going to <a class="reference external" href="https://github.com/twisted/twisted">https://github.com/twisted/twisted</a> and clicking on &quot;fork&quot;.
+Then set up your local repository:</p>
+<div class="highlight"><pre><span></span><span class="go">git clone https://github.com/&lt;yourusername&gt;/twisted.git Twisted</span>
+<span class="go">cd Twisted</span>
+<span class="go">git remote add upstream https://github.com/twisted/twisted.git</span>
+<span class="go">git fetch upstream</span>
+<span class="go">git branch -u upstream/trunk trunk</span>
+</pre></div>
+<p>NOTE for experienced Git users: for historical reasons, Twisted's main branch is currently named &quot;trunk&quot;, instead of the usual &quot;master&quot;.</p>
+</div>
+<div class="section" id="creating-your-work-environment">
+<span id="creatingyourworkenvironment"></span><h2>Creating your work environment</h2>
+<p>Twisted development does not enforce any specific work/build environment.</p>
+<p>Twisted uses Tox for managing the environment used in the continuous testing systems (GitHub Actions, Circle CI, Travis-CI, Appveyor).</p>
+</div>
+<div class="section" id="with-tox">
+<h2>With Tox</h2>
+<p>You will need Tox version at least 2.4. (On Ubuntu 16.04 you have 2.3.1).</p>
+<p>See README.md and tox.ini comments for more details. Note that some environments are for CI systems and not designed for local runs.</p>
+<p>Here is an example for running the test in a specific environment:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>tox -e alldeps-nocov twisted.conch.test.test_transport
+<span class="gp">$ </span>tox -e lint,black,newsfragment,manifest-checker
+</pre></div>
+<p>You can also use tox just to initialize the dev virtual environment and then manually active and use it:</p>
+<div class="highlight"><pre><span></span><span class="go">tox -e nodeps-nocov-posix --develop</span>
+<span class="go">. build/nodeps-nocov-posix/bin/active</span>
+<span class="go">trial twisted.conch.test.test_transport</span>
+</pre></div>
+</div>
+<div class="section" id="without-tox">
+<h2>Without Tox</h2>
+<p>For faster runs, you can skip tox and build a custom working environment.</p>
+<p>For your convenience, the setup.py file defined optional components, <cite>dev</cite> component being one of them.</p>
+<p>Here is an example of creating an environment using virtualenv.</p>
+<div class="highlight"><pre><span></span><span class="gp"># </span>Create base environment.
+<span class="go">virtualenv build/</span>
+<span class="gp"># </span>For Unix
+<span class="go">. build/bin/activate</span>
+<span class="gp"># </span>For windows <span class="o">(</span>replace .bat with .ps1 <span class="k">for</span> powershell<span class="o">)</span>
+<span class="go">build/Scripts/activate.bat</span>
+<span class="go">pip install pypiwin32</span>
+
+<span class="gp"># </span>Install dev dependencies, also forcing upgrade of existing versions.
+<span class="go">pip install -U -e &#39;.[dev]&#39;</span>
+<span class="gp"># </span>At least on my Ubuntu <span class="m">16</span>.06 the install_requires were not correctly installed,
+<span class="gp"># </span>so I am doing a manual install based on the content of src/twisted/python/_setup.py.
+<span class="go">pip install automat incremental constantly diff_cover</span>
+
+<span class="gp"># </span>Use the dev tools.
+<span class="gp"># </span>Prefix this with the path to python.exe on Windows
+<span class="go">trial twisted.conch.test.test_transport</span>
+
+<span class="gp"># </span>Using the coding standard guidelines validation tool... will get a lot of <span class="nb">false</span> positives
+<span class="go">twistedchecker twisted.conch.ssh.transport</span>
+<span class="gp"># </span>On Linux/OSX there is a helper to only raise error <span class="k">for</span> the diff
+<span class="go">./.travis/twistedchecker-trunk-diff.sh src/twisted/</span>
+
+<span class="gp"># </span>Static code analysis and checkers <span class="o">(</span>see tox.ini <span class="k">for</span> inspiration<span class="o">)</span>
+<span class="go">pyflakes twisted/conch/ssh/transport.py</span>
+<span class="go">git diff trunk... | admin/pycodestyle-twisted.py --diff</span>
+<span class="go">./bin/admin/check-newsfragment src/twisted/</span>
+<span class="go">check-manifest --ignore &quot;docs/_build*,docs/historic/*,admin*,bin/admin*,twisted/topfiles/*.Old&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="submitting-a-patch">
+<span id="submittingapatch"></span><h2>Submitting a Patch</h2>
+<p>Here's a quick step-by-step guide to getting from an idea for an improvement to Twisted to something that we can integrate.  First, I'll explain just the mechanics of getting your code into review, not what the code itself should do.  If you actually want us to be able to use your code, you will also want to read the section below on getting your patch accepted, too!</p>
+<ol class="arabic simple">
+<li>For the patch you are submitting, make sure that a <a class="reference external" href="https://twistedmatrix.com/trac/report">ticket exists using the &quot;search&quot; field above</a>, and Google for the patch which you are submitting.<ol class="arabic">
+<li>If you can't find one, file a new ticket using the <a class="reference external" href="https://twistedmatrix.com/trac/newticket">new ticket</a> link above. See: <a class="reference external" href="{filename}/pages/Twisted/TwistedDevelopment#ticketsmanagement#ticketsmanagement">Tickets Management</a>.</li>
+</ol>
+</li>
+<li>Create a <a class="reference external" href="https://help.github.com/articles/fork-a-repo/">fork on GitHub</a> and clone it (see <a class="reference external" href="#gettingthesourcecode">Getting the source code</a> above).</li>
+<li>Create a branch in git for your code.  If your ticket is <strong>1234</strong> and your GitHub ID is <strong>myuserid</strong>, you can create a branch like:</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="go">git checkout trunk</span>
+<span class="go">git pull</span>
+<span class="go">git checkout -b 1234-myuserid-mychange</span>
+</pre></div>
+<ol class="arabic simple">
+<li>Edit the code in the branch that you just checked out, making your awesome change to Twisted.</li>
+<li>Make sure that your patch fulfills all of the requirements of the <a class="reference external" href="https://twisted.org/pages/ReviewProcess.html">ReviewProcess</a>, so you don't need to submit your patch many repeated times. Run <tt class="docutils literal">tox <span class="pre">-e</span> <span class="pre">black-reformat</span></tt> to automate the formatting.</li>
+<li>Every patch needs a <a class="reference external" href="https://twisted.org/pages/ReviewProcess.html#newsfiles">topfile news fragment</a> to tell the user what was changed</li>
+<li><dl class="first docutils">
+<dt>Commit your changes</dt>
+<dd><tt class="docutils literal">git commit <span class="pre">-am</span> &quot;Changed some stuff&quot;</tt></dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Push your changes to GitHub</dt>
+<dd><tt class="docutils literal">git push <span class="pre">1234-myuserid-mychange</span></tt></dd>
+</dl>
+</li>
+<li>Create a <a class="reference external" href="https://help.github.com/articles/creating-a-pull-request/">GitHub pull request</a> for the <strong>my-new-change</strong> branch.  Make sure that in the pull request, you put a link to the ticket that you filed above.</li>
+<li>In your ticket, put a link to the GitHub pull request.</li>
+<li>Put the ticket into review.  This is accomplished by doing the following:<ol class="arabic">
+<li>enter the word <strong>&quot;review&quot;</strong> into the <strong>&quot;Keywords&quot;</strong> field of the ticket.  (If there are other keywords already there, just add a space to separate the keyword.)</li>
+<li>Click on the &quot;reassign to&quot; radio button.</li>
+<li>Select the topmost, blank entry from the &quot;reassign to&quot; button.</li>
+<li>Optionally, add a comment explaining which patch you would like reviewed (if there are already other attached files), and explaining <strong>what</strong> your change does (as opposed to the <strong>why</strong> you want it done, which you should have put into the ticket's summary and description).</li>
+<li>Hit &quot;submit changes&quot;.</li>
+</ol>
+</li>
+<li>At this point, you need to wait for feedback.  If your patch is very good, very simple, and obviously correct, we may just apply it, but it is ''very unlikely'' that the first draft of a patch will be accepted as-is.  When a Twisted developer reviews your patch, they will re-assign the ticket to you; you can <a class="reference external" href="http://twistedmatrix.com/trac/report/7">see the list of tickets assigned to you by clicking here</a>. Unfortunately, the time it takes us to deal with a ticket submitted for review is highly variable, and depends on how many other tickets are waiting review, the amount of free time that the Twisted core development team has, and how many resources we have available for <a class="reference external" href="http://labs.twistedmatrix.com/">sponsored development</a>.</li>
+<li>When you do receive a review comment, push changes to your branch which address that feedback, then place the ticket back in review.</li>
+<li>When placing the ticket back for review, make sure your branch is up to date with latest trunk, and that there will be no merge conflicts.</li>
+<li>Don't push your changes by rewriting the history, merge trunk into your branch.</li>
+</ol>
+</div>
+<div class="section" id="getting-your-patch-accepted">
+<h2>Getting Your Patch Accepted</h2>
+<p>If you are interested in contributing to Twisted for the first time, consider working on an existing ticket rather than contributing a new feature.  Fixes for existing problems or implementations of already-requested features will generally take priority over new ideas.  Consider discussing the work you want to do with <cite>other Twisted developers first &lt;{filename}/pages/Twisted/TwistedCommunity.rst&gt;</cite>.</p>
+<p>Familiarize yourself with project policies and coding standards and make sure your full contribution (code, test, documentation, design) adheres to it. See: <a class="reference external" href="#policies">Policies</a>.</p>
+<p>There are a couple of tools to help with automatic policy checks.
+Make sure there are no errors when running these tox environments (or equivalent checks):</p>
+<p><tt class="docutils literal">$ tox <span class="pre">-e</span> <span class="pre">lint,black,newsfragment,manifest-checker</span></tt></p>
+<p>Make sure that you have written unit tests and docstrings for all code which has changed in your patch.  It works best if you use test-driven development to write your patch initially, and write your tests before your code.  (Believe me, if you write your tests after you write your code, we ''will'' know.  It's more obvious than you think.)</p>
+<p>Run the full test suite ''before'' submitting your patch, and fix any problems you discover.  If a reviewer notices failing tests, they may not give your code a deep look, and you may have to wait longer for a second review. See: <a class="reference external" href="#toolsfordevelopment">Tools for development</a>.</p>
+<p>Some users may discover that their system is unusual and Twisted's test suite <strong>does not pass</strong> &quot;out of the box&quot;.  If this is the case, just make sure that the <strong>same</strong> tests are failing for you in a pristine checkout of trunk and with your changes applied.  Then, in addition to submitting your patch, please let us know about the problem with the test suite!</p>
+</div>
+<div class="section" id="id2">
+<span id="toolsfordevelopment"></span><h2>Tools For Development</h2>
+<p>There are a few useful tools for developing Twisted. Some of them are included with Twisted, some are third-party dependencies.</p>
+<p>Command from this section assume that you run them from withing Twisted source code checkout root.</p>
+<p>To run the tests, simply run <cite>trial twisted</cite>. Make sure you run trial command that comes with twisted source code and not the one provided by your operating system.</p>
+<p>To generate the narrative documentation or API documentation, see <cite>the wiki page on Twisted documentation &lt;{filename}/pages/ReviewingDocumentation.rst&gt;</cite>.</p>
+<p>After every commit to Twisted, the buildbot runs all the unit tests and reports <a class="reference external" href="http://buildbot.twistedmatrix.com/">test results on several platforms</a>.  Here is a page showing only the <a class="reference external" href="http://buildbot.twistedmatrix.com/boxes-supported">test results on supported platforms</a>. All tests on supported platforms always pass. Watch the buildbot. Because sometimes, the buildbot watches back.</p>
+</div>
+<div class="section" id="runtime-and-development-dependencies">
+<h2>Runtime and development dependencies</h2>
+<p>Required and optional dependencies are now documented inside the source code _EXTRAS_REQUIRE variable</p>
+<p>Some optional dependencies are not yet documented and they are presented here:</p>
+<ul class="simple">
+<li>pygtk (or pygi or pygobject or something) is required for the gtk class of reactors</li>
+<li>wxpython is required for wxsupport / wxreactor</li>
+<li>gadfly, sqlite, pypgsql, psycopg, mysqldb, kinterbasdb (at least one) are required for twisted.enterprise.adbapi</li>
+<li>SOAPpy is required for Twisted Web's SOAP support</li>
+<li>pypam is required for twisted.cred PAM integration</li>
+</ul>
+<p>And there are some additional development tools:</p>
+<ul class="simple">
+<li>subunit is required for trial's subunit output plugin</li>
+<li>cython is required to update iocpreactor and some Failure unit tests</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>Tickets management</h2>
+<p>All changes to source code require a ticket.</p>
+<p>If you file a new ticket, please start with a clear description of <strong>why</strong> such a change is desirable.
+We can read your attached code to find out <strong>what</strong> you are doing, but we can't read your mind to figure out why you want it done!</p>
+<p>A Twisted ticket can be of one of three types.</p>
+<ul class="simple">
+<li><strong>Enhancements</strong> are used for feature additions.  These typically take the form of a new API or an expansion of an existing API.  Enhancement tickets should clearly describe the desired feature.  The more well specified a feature is, the more likely it is to be implemented (and importantly, the more likely it is that what is implemented will actually be what the reporter wanted!) and the easier it is to implement.  Remember that the ticket is possibly the only persistent record of the feature request.  If it is not self-contained and sufficiently detailed, then it will likely fail to communicate the reporter's idea, diminishing its value (possibly all the way down to zero).</li>
+<li><strong>Defects</strong> are used to track bugs in existing APIs.  Defect tickets are easier to specify than enhancements.  A defect should briefly describe the problem, but the bulk of the ticket should be a runnable program (ideally in the form of a unit test) which demonstrates the bug.</li>
+<li><strong>Regressions</strong> are similar to defects, but are for bugs which are introduced into APIs in newer releases of Twisted.  Like defect tickets, regression tickets should have a runnable program attached to demonstrate the problem.</li>
+<li><strong>Release blocker: regression</strong> a ticket which blocks the release of the next Twisted version due to a regression.</li>
+<li><strong>Release blocker: wrong release notes</strong> a ticket which blocks the release of the next Twisted version due to a problem in the release notes.</li>
+<li><strong>Release blocker: release process bug</strong> a ticket which blocks the release of the next Twisted version due to a problem/issue/defect in the release process itself.</li>
+</ul>
+<p>A ticket can have attached the following official tags <a class="reference external" href="https://twisted.org/pages/BugKeywords.html">BugKeywords</a>.</p>
+<p>There are some UsefulQueries for finding issues in the tracker.</p>
+</div>
+<div class="section" id="id4">
+<span id="policies"></span><h2>Policies</h2>
+<p>This series of documents is designed for people who wish to contribute to the Twisted codebase.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://twistedmatrix.com/documents/current/core/development/policy">Development policies</a></li>
+<li><a class="reference external" href="http://twistedmatrix.com/documents/current/core/development/naming.html">Naming Conventions</a></li>
+<li><a class="reference external" href="http://epydoc.sourceforge.net/epytext.html">Epytext</a> for docstrings format</li>
+<li><a class="reference external" href="http://sphinx-doc.org/rest.html">ReStructuredText and Sphinx</a> for narrative documentation.</li>
+<li><a class="reference external" href="https://twisted.org/pages/Security.html">Security</a></li>
+<li><a class="reference external" href="http://twistedmatrix.com/documents/current/core/development/philosophy.html">Philosophy</a></li>
+<li><a class="reference external" href="https://twisted.org/pages/ReviewProcess.html">Review Process</a></li>
+<li><a class="reference external" href="https://twisted.org/pages/ContributorAdvancementPath.html">Contributor Advancement Path</a></li>
+</ul>
+</div>
+<div class="section" id="wiki-pages-maintenance">
+<h2>Wiki pages maintenance</h2>
+<p>Changes to wiki pages don't require a ticket.</p>
+<p>To prevent spam-bots, newly registered accounts don't have write access for wiki pages.</p>
+<p>If you want to edit wiki pages, ask for write permission via one of <a class="reference external" href="https://twisted.org/pages/TwistedCommunity.html">community communication channel</a> . Please mention your Trac username.</p>
+</div>
+<div class="section" id="win32-development">
+<h2>Win32 development</h2>
+<p>If you want to hack Twisted on Win32, see Ying Li's <a class="reference external" href="http://blog.ying.li/2012/03/twisted-development-on-windows-v2.html">short tutorial on setting up a Twisted win32 development environment</a>; but note that it describes getting the code with Subversion and you will currently need to use Git.</p>
+</div>
+<div class="section" id="twisted-maintenance">
+<h2>Twisted Maintenance</h2>
+<p>You might be interested in learning about tasks related to maintaining this website? or for <a class="reference external" href="{filename}/pages/ReleaseProcess.rst">releasing Twisted</a>.</p>
+</div>
+
+        </div>
+        </div>
+        </div>
+<div class="sphinxsidebar">
+<div class="sphinxsidebarwrapper">
+</div>
+</div>    </div>
+
+    </section>
+
+        <div id="footer"><hr>
+                <div> </div>
+                <p class="left2">
+        Copyright 2021, Twisted Matrix Labs. Ver 21.2.0. Built on 2021-02-28.<br />
+        Site design<br />
+        By <a href="http://huw.ugbox.net/">huw.wilkins.</a>
+
+                </p>
+                <p class="right"></p>
+        </div>
+
+
+</body>
+</html>

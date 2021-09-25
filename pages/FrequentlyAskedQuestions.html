@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>Test Twisted Trac Wiki - Twisted FAQ</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+
+        <meta name="Description" content="An event-driven networking engine written in Python and MIT licensed." />
+
+        <link rel="stylesheet" type="text/css" href="https://twisted.org/theme/css/twistedtrac.css" />
+
+
+</head>
+
+<body>
+        <div id="banner">
+                <div id="top_grad"></div>
+                <div id="tab">
+                        <a href="https://twistedmatrix.com/trac/wiki">HOME</a>
+                        <a href="https://twistedmatrix.com/trac/wiki/FrequentlyAskedQuestions">FAQ</a>
+                        <a href="/">DOCS</a>
+                        <a href="https://twistedmatrix.com/trac/wiki/Downloads">DOWNLOAD</a>
+                </div>
+
+                <div id="header">
+                        <a id="logo" href="https://twisted.org/"><img src="https://twisted.org/theme/images/trac_banner.png" alt="Twisted" /></a>
+                </div>
+        </div>
+
+<div id="mainnav" class="related">
+	<ul>
+		<li><a href="https://twisted.org">Twisted 21.2.0 documentation</a> »</li>
+	</ul>
+</div>
+        <div id="ctxtnav" class="nav">
+        </div>
+
+    <section>
+
+    <div class="document">
+        <div class="documentwrapper">
+        <div class="bodywrapper">
+        <h1>Twisted FAQ</h1>
+        
+        <div class="entry-content">
+        <p>This is a list of Frequently Asked Questions regarding Twisted.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#general" id="id6">General</a><ul>
+<li><a class="reference internal" href="#what-is-twisted" id="id7">What is Twisted?</a></li>
+<li><a class="reference internal" href="#why-should-i-use-twisted" id="id8">Why should I use Twisted?</a></li>
+<li><a class="reference internal" href="#i-have-a-problem-getting-twisted" id="id9">I have a problem getting Twisted.</a></li>
+<li><a class="reference internal" href="#how-big-is-twisted" id="id10">How big is Twisted?</a></li>
+<li><a class="reference internal" href="#which-parts-of-twisted-are-stable" id="id11">Which parts of Twisted are stable?</a></li>
+<li><a class="reference internal" href="#why-doesn-t-twisted-follow-pep-8" id="id12">Why doesn't Twisted follow PEP 8?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation" id="id13">Installation</a><ul>
+<li><a class="reference internal" href="#why-am-i-getting-importerrors-for-twisted-subpackages-on-my-64bit-installation-of-redhat-fedora-centos" id="id14">Why am I getting ImportErrors for Twisted subpackages on my 64bit installation of RedHat/Fedora/CentOS?</a></li>
+<li><a class="reference internal" href="#can-i-install-twisted-using-easy-install-or-pip" id="id15">Can I install Twisted using easy_install or pip?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#core-twisted" id="id16">Core Twisted</a><ul>
+<li><a class="reference internal" href="#why-does-twisted-depend-on-zope" id="id17">Why does Twisted depend on Zope?</a></li>
+<li><a class="reference internal" href="#how-can-i-access-self-factory-from-my-protocol-s-init" id="id18">How can I access self.factory from my Protocol's __init__?</a></li>
+<li><a class="reference internal" href="#where-can-i-find-out-how-to-write-twisted-servers" id="id19">Where can I find out how to write Twisted servers?</a></li>
+<li><a class="reference internal" href="#how-do-i-make-twisted-talk-to-multiple-clients-connect-to-multiple-servers" id="id20">How do I make Twisted talk to multiple clients / connect to multiple servers?</a></li>
+<li><a class="reference internal" href="#how-do-i-make-input-on-one-connection-result-in-output-on-another" id="id21">How do I make input on one connection result in output on another?</a></li>
+<li><a class="reference internal" href="#why-is-protocol-datareceived-called-with-only-part-of-the-data-i-called-transport-write-with" id="id22">Why is <tt class="docutils literal">protocol.dataReceived</tt> called with only part of the data I called <tt class="docutils literal">transport.write</tt> with?</a></li>
+<li><a class="reference internal" href="#why-isn-t-my-connectionlost-method-called" id="id23">Why isn't my <tt class="docutils literal">connectionLost</tt> method called?</a></li>
+<li><a class="reference internal" href="#when-i-try-to-install-my-reactor-i-get-errors-about-a-reactor-already-being-installed-what-gives" id="id24">When I try to install my reactor, I get errors about a reactor already being installed. What gives?</a></li>
+<li><a class="reference internal" href="#twistd-won-t-load-my-tap-file-what-s-this-ephemeral-nonsense" id="id25"><tt class="docutils literal">twistd</tt> won't load my <tt class="docutils literal">tap</tt> file! What's this Ephemeral nonsense?</a></li>
+<li><a class="reference internal" href="#i-get-interrupted-system-call-errors-when-i-use-os-popen2-how-do-i-read-results-from-a-sub-process-in-twisted" id="id26">I get Interrupted system call errors when I use os.popen2. How do I read results from a sub-process in Twisted?</a></li>
+<li><a class="reference internal" href="#why-don-t-my-spawnprocess-programs-see-my-environment-variables" id="id27">Why don't my spawnProcess programs see my environment variables?</a></li>
+<li><a class="reference internal" href="#my-exceptions-and-tracebacks-aren-t-getting-printed-or-my-deferred-or-deferredlist-seems-like-it-never-fires-so-my-program-just-mysteriously-hangs-what-s-wrong" id="id28">My exceptions and tracebacks aren't getting printed!  Or My Deferred or DeferredList seems like it never fires, so my program just mysteriously hangs! What's wrong?</a></li>
+<li><a class="reference internal" href="#why-does-it-take-a-long-time-for-data-i-send-with-transport-write-to-arrive-at-the-other-side-of-the-connection" id="id29">Why does it take a long time for data I send with <tt class="docutils literal">transport.write</tt> to arrive at the other side of the connection?</a></li>
+<li><a class="reference internal" href="#how-do-i-use-deferreds-to-make-my-blocking-code-non-blocking" id="id30">How do I use Deferreds to make my blocking code non-blocking?</a></li>
+<li><a class="reference internal" href="#i-get-exceptions-valueerror-signal-only-works-in-main-thread-when-i-try-to-run-my-twisted-program-what-s-wrong" id="id31">I get <tt class="docutils literal">exceptions.ValueError: signal only works in main thread</tt> when I try to run my Twisted program! What's wrong?</a></li>
+<li><a class="reference internal" href="#i-m-trying-to-stop-my-program-with-sys-exit-but-twisted-seems-to-catch-it-how-do-i-exit-my-program" id="id32">I'm trying to stop my program with sys.exit(), but Twisted seems to catch it! How do I exit my program?</a></li>
+<li><a class="reference internal" href="#how-do-i-find-out-the-ip-address-of-the-other-end-of-my-connection" id="id33">How do I find out the IP address of the other end of my connection?</a></li>
+<li><a class="reference internal" href="#why-don-t-twisted-s-network-methods-support-unicode-objects-as-well-as-strings" id="id34">Why don't Twisted's network methods support Unicode objects as well as strings?</a></li>
+<li><a class="reference internal" href="#why-do-i-get-a-permission-denied-error-trying-to-write-site-packages-twisted-plugins-dropin-cache-new-when-i-use-twistd-or-trial-or-some-other-twisted-program" id="id35">Why do I get a <em>Permission denied</em> error trying to write <cite>.../site-packages/twisted/plugins/dropin.cache.new</cite> when I use <tt class="docutils literal">twistd</tt> or <tt class="docutils literal">trial</tt> or some other Twisted program?</a></li>
+<li><a class="reference internal" href="#why-can-t-the-twisted-s-reactor-be-restarted" id="id36">Why can't the Twisted's reactor be restarted?</a></li>
+<li><a class="reference internal" href="#what-s-the-best-way-of-integrating-twisted-with-pygame" id="id37">What's the best way of integrating Twisted with pygame?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2" id="id38">Perspective Broker</a><ul>
+<li><a class="reference internal" href="#how-can-i-get-the-reference-to-a-client-from-a-perspective" id="id39">How can I get the reference to a client from a Perspective?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#requests-and-contributing" id="id40">Requests and Contributing</a><ul>
+<li><a class="reference internal" href="#twisted-is-cool-but-i-need-to-add-more-functionality" id="id41">Twisted is cool, but I need to add more functionality.</a></li>
+<li><a class="reference internal" href="#i-have-a-patch-how-do-i-maximize-the-chances-the-twisted-developers-will-include-it" id="id42">I have a patch. How do I maximize the chances the Twisted developers will include it?</a></li>
+<li><a class="reference internal" href="#and-to-whom-do-i-send-it" id="id43">And to whom do I send it?</a></li>
+<li><a class="reference internal" href="#my-company-would-love-to-use-twisted-but-it-s-missing-feature-x-can-you-implement-it" id="id44">My company would love to use Twisted, but it's missing feature X, can you implement it?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#documentation" id="id45">Documentation</a><ul>
+<li><a class="reference internal" href="#twisted-really-needs-documentation-for-x-y-or-z-how-come-it-s-not-documented" id="id46">Twisted really needs documentation for X, Y or Z - how come it's not documented?.</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#communicating-with-us" id="id47">Communicating with us</a><ul>
+<li><a class="reference internal" href="#there-s-a-bug-in-twisted-where-do-i-report-it" id="id48">There's a bug in Twisted. Where do I report it?</a></li>
+<li><a class="reference internal" href="#where-do-i-go-for-help" id="id49">Where do I go for help?</a></li>
+<li><a class="reference internal" href="#how-do-i-e-mail-a-twisted-developer" id="id50">How do I e-mail a Twisted developer?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="general">
+<h2><a class="toc-backref" href="#id6">General</a></h2>
+<div class="section" id="what-is-twisted">
+<h3><a class="toc-backref" href="#id7">What is Twisted?</a></h3>
+<p>See the <a class="reference external" href="https://twisted.org/pages/TwistedProject.html">Twisted Project</a></p>
+</div>
+<div class="section" id="why-should-i-use-twisted">
+<h3><a class="toc-backref" href="#id8">Why should I use Twisted?</a></h3>
+<p>See the <a class="reference external" href="https://twisted.org/pages/TwistedAdvantage.html">Twisted Advantage</a></p>
+</div>
+<div class="section" id="i-have-a-problem-getting-twisted">
+<h3><a class="toc-backref" href="#id9">I have a problem getting Twisted.</a></h3>
+<p>Did you check the <a class="reference external" href="https://twisted.org/pages/Documentation.html">Documentation HOWTO collection?</a> There are so many documents there that they might overwhelm you... try starting from the index, reading through the overviews and seeing if there seems to be a chapter which explains what you need to. You can try reading the PostScript or PDF formatted books, inside the distribution. And, remember, the source will be with you... always.</p>
+</div>
+<div class="section" id="how-big-is-twisted">
+<h3><a class="toc-backref" href="#id10">How big is Twisted?</a></h3>
+<p>As of Twisted 15.4, the source release archive of Twisted is about 3MB. Installed normally, uncompressed, Twisted is a bit larger - about 12MB.</p>
+</div>
+<div class="section" id="which-parts-of-twisted-are-stable">
+<h3><a class="toc-backref" href="#id11">Which parts of Twisted are stable?</a></h3>
+<p>In general, everything which is part of a Twisted release is stable.  See <a class="reference external" href="https://twisted.org/pages/CompatibilityPolicy.html">CompatibilityPolicy</a> for details.</p>
+</div>
+<div class="section" id="why-doesn-t-twisted-follow-pep-8">
+<h3><a class="toc-backref" href="#id12">Why doesn't Twisted follow PEP 8?</a></h3>
+<p>Twisted does follow much of PEP 8 (as is documented in the <a class="reference external" href="http://twistedmatrix.com/documents/current/core/development/policy/coding-standard.html#auto26">Twisted coding standard</a>.  However, Twisted prefers camelCase for variables, functions, and methods (whereas PEP 8 recommends underscores) because Twisted predates PEP 8 and converting the entire codebase now is infeasible.  Twisted continues to use its existing naming convention for new APIs to retain consistency within the project (according to PEP 8's recommendation).</p>
+</div>
+</div>
+<div class="section" id="installation">
+<h2><a class="toc-backref" href="#id13">Installation</a></h2>
+<div class="section" id="why-am-i-getting-importerrors-for-twisted-subpackages-on-my-64bit-installation-of-redhat-fedora-centos">
+<h3><a class="toc-backref" href="#id14">Why am I getting ImportErrors for Twisted subpackages on my 64bit installation of RedHat/Fedora/CentOS?</a></h3>
+<p>Red Hat and derived Linux distributions arrange to have certain Python libraries installed in <tt class="docutils literal">/usr/lib/</tt> and other parts installed in <tt class="docutils literal">/usr/lib64/</tt>  This is problematic for Twisted, since it results in some of Twisted being installed in one directory and the rest installed in another.  Python will load a package from only one directory.  You can override this default behavior when you install Twisted by supplying the <tt class="docutils literal"><span class="pre">--install-lib</span></tt> parameter when running Twisted's <tt class="docutils literal">setup.py</tt>.</p>
+</div>
+<div class="section" id="can-i-install-twisted-using-easy-install-or-pip">
+<h3><a class="toc-backref" href="#id15">Can I install Twisted using easy_install or pip?</a></h3>
+<p>Yes, Twisted can be installed both using pip and easy_install, although pip is recommended.</p>
+</div>
+</div>
+<div class="section" id="core-twisted">
+<h2><a class="toc-backref" href="#id16">Core Twisted</a></h2>
+<div class="section" id="why-does-twisted-depend-on-zope">
+<h3><a class="toc-backref" href="#id17">Why does Twisted depend on Zope?</a></h3>
+<p>Twisted only depends on <a class="reference external" href="http://www.zope.org/Products/ZopeInterface">Zope Interface</a>, an interface package which is also packaged and distributed independently from the main Zope distribution.  Twisted uses Zope Interface to define and document APIs. Packages are available for all major operating systems.</p>
+</div>
+<div class="section" id="how-can-i-access-self-factory-from-my-protocol-s-init">
+<h3><a class="toc-backref" href="#id18">How can I access self.factory from my Protocol's __init__?</a></h3>
+<p>You can't. A <tt class="docutils literal">Protocol</tt> doesn't have a <tt class="docutils literal">Factory</tt> when it is created. Instead, you should probably be doing that in your Protocol's <tt class="docutils literal">connectionMade</tt> method.</p>
+<p>Similarly you shouldn't be doing real work, like connecting to databases, in a Factory's <tt class="docutils literal">__init__</tt> either. Instead, do that in <tt class="docutils literal">startFactory</tt></p>
+<p>See <a class="reference external" href="http://twistedmatrix.com/documents/current/core/howto/servers.html">Writing Servers</a> and <a class="reference external" href="http://twistedmatrix.com/documents/current/core/howto/clients.html">Writing Clients</a> for more details.</p>
+</div>
+<div class="section" id="where-can-i-find-out-how-to-write-twisted-servers">
+<h3><a class="toc-backref" href="#id19">Where can I find out how to write Twisted servers?</a></h3>
+<p>Try <a class="reference external" href="http://twistedmatrix.com/documents/current/core/howto/servers.html">Writing Servers</a>.</p>
+</div>
+<div class="section" id="how-do-i-make-twisted-talk-to-multiple-clients-connect-to-multiple-servers">
+<h3><a class="toc-backref" href="#id20">How do I make Twisted talk to multiple clients / connect to multiple servers?</a></h3>
+<p>Twisted already does this.  If you want to connect to multiple servers, call <tt class="docutils literal">connectTCP</tt> (or similar) multiple times, and each call will result in a single outgoing connection.  <tt class="docutils literal">listenTCP</tt> will result in your factory (and therefore your protocol) being invoked for each incoming connection.</p>
+<p>Sometimes people ask this question when they write a function that calls <tt class="docutils literal">connectTCP</tt>, then <tt class="docutils literal">reactor.run()</tt>.  You don't usually need to call <tt class="docutils literal">reactor.run()</tt> yourself; let <a class="reference external" href="http://twistedmatrix.com/documents/current/core/howto/basics.html#auto1">twistd</a> (not &quot;Twisted&quot;) do it.  If you do need to call it yourself, call it <em>just once</em> after your initial setup.  When <tt class="docutils literal">reactor.run()</tt> exits, your program should too.</p>
+</div>
+<div class="section" id="how-do-i-make-input-on-one-connection-result-in-output-on-another">
+<h3><a class="toc-backref" href="#id21">How do I make input on one connection result in output on another?</a></h3>
+<p>This seems like it's a Twisted question, but actually it's a Python question.  Each <tt class="docutils literal">Protocol</tt> object represents one connection; you can call its <tt class="docutils literal">transport.write</tt> to write some data to it.  These are regular Python objects; you can put them into lists, dictionaries, or whatever other data structure is appropriate to your application.</p>
+<p>As a simple example, add a list to your factory, and in your protocol's <tt class="docutils literal">connectionMade</tt> and <tt class="docutils literal">connectionLost</tt>, add it to and remove it from that list.  Here's the Python code:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">twisted.internet.protocol</span> <span class="kn">import</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">Factory</span>
+<span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">reactor</span>
+
+<span class="k">class</span> <span class="nc">MultiEcho</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factory</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">factory</span>
+
+    <span class="k">def</span> <span class="nf">connectionMade</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">echoers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">dataReceived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">echoer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">echoers</span><span class="p">:</span>
+            <span class="n">echoer</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">connectionLost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">echoers</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">MultiEchoFactory</span><span class="p">(</span><span class="n">Factory</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">echoers</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">buildProtocol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MultiEcho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="n">reactor</span><span class="o">.</span><span class="n">listenTCP</span><span class="p">(</span><span class="mi">4321</span><span class="p">,</span> <span class="n">MultiEchoFactory</span><span class="p">())</span>
+<span class="n">reactor</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="why-is-protocol-datareceived-called-with-only-part-of-the-data-i-called-transport-write-with">
+<h3><a class="toc-backref" href="#id22">Why is <tt class="docutils literal">protocol.dataReceived</tt> called with only part of the data I called <tt class="docutils literal">transport.write</tt> with?</a></h3>
+<p>TCP is a stream-oriented transport.  This means that when you call <tt class="docutils literal">transport.write</tt>, the data may be broken up into arbitrarily-sized chunks for transmission over the network.  There is no way for Twisted to determine how large the data originally written to the transport was.</p>
+<p>If you want to send a message and receive it whole on the other end of a connection, you must decide on a format for the message and parse it.  For example, prefixing the message with a length or terminating it with a message boundary.  Luckily, Twisted provides many different utilities for this purpose, which can automatically divide the data stream into messages for you:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://twistedmatrix.com/documents/8.2.0/api/twisted.protocols.basic.LineReceiver.html">LineReceiver</a></li>
+<li><a class="reference external" href="http://twistedmatrix.com/documents/8.2.0/api/twisted.protocols.basic.NetstringReceiver.html">NetstringReceiver</a></li>
+<li><a class="reference external" href="http://twistedmatrix.com/documents/8.2.0/api/twisted.protocols.basic.Int16StringReceiver.html">Int16StringReceiver</a></li>
+</ul>
+<p>These are implemented as classes you inherit from rather than <tt class="docutils literal">Protocol</tt>, and implement methods other than <tt class="docutils literal">dataReceived</tt> (such as <tt class="docutils literal">stringReceived</tt> or <tt class="docutils literal">lineReceived</tt>).  You may also want to consider a higher-level messaging protocol, to exchange messages with more structure than a simple collection of bytes.  For example, the <a class="reference external" href="http://twistedmatrix.com/documents/8.2.0/api/twisted.protocols.amp.html">Asynchronous Messaging Protocol</a>, or <a class="reference external" href="http://twistedmatrix.com/projects/core/documentation/howto/pb-intro.html">Perspective Broker</a>.</p>
+</div>
+<div class="section" id="why-isn-t-my-connectionlost-method-called">
+<h3><a class="toc-backref" href="#id23">Why isn't my <tt class="docutils literal">connectionLost</tt> method called?</a></h3>
+<p><tt class="docutils literal">connectionLost</tt> is called when the platform notifies Twisted that the TCP connection has been closed.  TCP connections are closed in one of two ways.  They can either be closed &quot;actively&quot; - by one side of the connection sending a close message to the other side - or they can be closed by timeout - one side deciding that the other side has taken too long to respond and interpreting this to mean that the other side is no longer paying attention to the connection.  However, for the timeout case, it is important to understand that if an application is not sending data over the connection, <strong>there is no response</strong> to <em>take too long</em> so no timeout will ever occur.  This means that if a network error disrupts a connection but the application is not sending data over it, it's possible for <tt class="docutils literal">connectionLost</tt> to never be called.  However, if the application is sending data over it, then the timeout will eventually expire.  TCP uses very large timeouts in order to account for very poor networks.  If you rely on TCP timeouts, expect as much as two hours (the precise amount is platform specific) to pass between when the disruption occurs and when <tt class="docutils literal">connectionLost</tt> is called.  If this is too long, you may want to use an application-level <em>keep alive</em> mechanism to discover lost connections earlier.  This just involves sending simple messages back and forth over a connection.  If it ever takes longer than whatever amount of time you decide is appropriate for your application to receive a response to one of these messages, consider the connection lost.</p>
+<p>Also, keep in mind that <tt class="docutils literal">transport.loseConnection()</tt> may not result in the connection closing immediately, e.g. if you have writes buffered. To close the connection immediately, discarding any buffered writes, call <tt class="docutils literal">transport.abortConnection()</tt>.</p>
+</div>
+<div class="section" id="when-i-try-to-install-my-reactor-i-get-errors-about-a-reactor-already-being-installed-what-gives">
+<h3><a class="toc-backref" href="#id24">When I try to install my reactor, I get errors about a reactor already being installed. What gives?</a></h3>
+<p>Here's the rule - installing a reactor should always be the <strong>first</strong> thing you do, and I do mean first. Importing other stuff before you install the reactor can break your code.</p>
+<p><a class="reference external" href="http://wiki.python.org/moin/TkInter">Tkinter</a> and <a class="reference external" href="http://wxpython.org/">wxPython</a> support, as they do not install a new reactor, can be done at any point, IIRC.</p>
+</div>
+<div class="section" id="twistd-won-t-load-my-tap-file-what-s-this-ephemeral-nonsense">
+<h3><a class="toc-backref" href="#id25"><tt class="docutils literal">twistd</tt> won't load my <tt class="docutils literal">tap</tt> file! What's this Ephemeral nonsense?</a></h3>
+<p>When the pickled application state cannot be loaded for some reason, it is common to get a rather opaque error like so:</p>
+<div class="highlight"><pre><span></span><span class="gp">% </span>twistd -f test2.tap
+
+<span class="go">Failed to load application: global name &#39;initRun&#39; is not defined</span>
+</pre></div>
+<p>The rest of the error will try to explain how to solve this problem, but a short comment first: this error is indeed terse -- but there is probably more data available elsewhere -- namely, the <tt class="docutils literal">twistd.log</tt> file. Open it up to see the full exception.</p>
+<p>The error might also look like this:</p>
+<div class="highlight"><pre><span></span><span class="go">Failed to load application: &lt;twisted.persisted.styles.Ephemeral instance at</span>
+<span class="go">0x82450a4&gt; is not safe for unpickling</span>
+</pre></div>
+<p>To load a <tt class="docutils literal">.tap</tt> file, as with any unpickling operation, all the classes used by all the objects inside it must be accessible at the time of the reload. This may require the <tt class="docutils literal">PYTHONPATH</tt> variable to have the same directories as were available when the application was first pickled.</p>
+<p>A common problem occurs in single-file programs which define a few classes, then create instances of those classes for use in a server of some sort. If the class is used directly, the name of the class will be recorded in the <tt class="docutils literal">.tap</tt> file as something like <tt class="docutils literal">__main__.MyProtocol</tt>. When the application is reloaded, it will look for the class definition in <tt class="docutils literal">__main__</tt> which probably won't have it. The unpickling routines need to know the module name, and therefore the source file, from which the class definition can be loaded.</p>
+<p>The way to fix this is to import the class from the same source file that defines it: if your source file is called <tt class="docutils literal">myprogram.py</tt> and defines a class called <tt class="docutils literal">MyProtocol</tt> you will need to do a <tt class="docutils literal">from myprogram import MyProtocol</tt> before (and in the same namespace as) the code that references the <tt class="docutils literal">MyProtocol</tt> class. This makes it important to write the module cleanly: doing an <tt class="docutils literal">import myprogram</tt> should only define classes, and should not cause any other subroutines to get run. All the code that builds the Application and saves it out to a .tap file must be inside an <tt class="docutils literal">if __name__ == '__main__'</tt> clause to make sure it is not run twice (or more).</p>
+<p>When you import the class from the module using an external name, that name will be recorded in the pickled <tt class="docutils literal">.tap</tt> file. When the <tt class="docutils literal">.tap</tt> is reloaded by <tt class="docutils literal">twistd</tt> it will look for <tt class="docutils literal">myprogram.py</tt> to provide the definition of <tt class="docutils literal">MyProtocol</tt>.</p>
+<p>Here is a short example of this technique:</p>
+<div class="highlight"><pre><span></span><span class="gp"># </span>file dummy.py
+<span class="go">from twisted.internet import protocol</span>
+<span class="go">class Dummy(protocol.Protocol): pass</span>
+<span class="go">if __name__ == &#39;__main__&#39;:</span>
+<span class="go">    from twisted.application import service, internet</span>
+<span class="go">    a = service.Application(&quot;dummy&quot;)</span>
+<span class="go">    import dummy</span>
+<span class="go">    f = protocol.Factory()</span>
+<span class="go">    f.protocol = dummy.Dummy # Note! Not &quot;Dummy&quot;</span>
+<span class="go">    internet.TCPServer(2000, f).setServiceParent(a)</span>
+<span class="go">    a.save()</span>
+</pre></div>
+</div>
+<div class="section" id="i-get-interrupted-system-call-errors-when-i-use-os-popen2-how-do-i-read-results-from-a-sub-process-in-twisted">
+<h3><a class="toc-backref" href="#id26">I get Interrupted system call errors when I use os.popen2. How do I read results from a sub-process in Twisted?</a></h3>
+<p>You should be using <tt class="docutils literal">reactor.spawnProcess</tt> (see <a class="reference external" href="http://twistedmatrix.com/documents/current/api/twisted.internet.interfaces.IReactorProcess.spawnProcess.html">interfaces.IReactorProcess.spawnProcess</a> There's also a convenience function, <a class="reference external" href="http://twistedmatrix.com/documents/current/api/twisted.internet.utils.getProcessOutput.html">getProcessOutput</a>, in <a class="reference external" href="http://twistedmatrix.com/documents/current/api/twisted.internet.utils.html">twisted.internet.utils</a>.</p>
+</div>
+<div class="section" id="why-don-t-my-spawnprocess-programs-see-my-environment-variables">
+<h3><a class="toc-backref" href="#id27">Why don't my spawnProcess programs see my environment variables?</a></h3>
+<p><a class="reference external" href="http://twistedmatrix.com/documents/current/api/twisted.internet.interfaces.IReactorProcess.spawnProcess.html">spawnProcess</a> defaults to clearing the environment of child processes as a security feature. You can either provide a dictionary with exactly the name-value pairs you want the child to use, or you can simply pass in <tt class="docutils literal">os.environ</tt> to inherit the complete environment.</p>
+</div>
+<div class="section" id="my-exceptions-and-tracebacks-aren-t-getting-printed-or-my-deferred-or-deferredlist-seems-like-it-never-fires-so-my-program-just-mysteriously-hangs-what-s-wrong">
+<h3><a class="toc-backref" href="#id28">My exceptions and tracebacks aren't getting printed!  Or My Deferred or DeferredList seems like it never fires, so my program just mysteriously hangs! What's wrong?</a></h3>
+<p>It really depends on what your program is doing, but the most common cause is this: it is firing -- but it's an error, not a success, and you have forgotten to add an <a class="reference external" href="http://twistedmatrix.com/documents/current/core/howto/glossary.html#errback">errback</a> , so it looks like nothing happens. Always add errbacks!</p>
+<p>The reason <tt class="docutils literal">Deferred</tt> can't automatically show your errors is because a <tt class="docutils literal">Deferred</tt> can still have callbacks and errbacks added to it even after a result is available -- so we have no reasonable place to put a logging call that wouldn't result in spurious tracebacks that are handled later on.  When a deferred is garbage collected with a Failure, a traceback is automatically printed.  However, if you keep a reference to your Deferred and it is never garbage collected, it's possible no traceback will be printed.  But in that case, you also have a memory leak.</p>
+<p>For even more verbose debugging information to be printed in Failure tracebacks, set <tt class="docutils literal">defer.setDebugging(True)</tt>.</p>
+</div>
+<div class="section" id="why-does-it-take-a-long-time-for-data-i-send-with-transport-write-to-arrive-at-the-other-side-of-the-connection">
+<h3><a class="toc-backref" href="#id29">Why does it take a long time for data I send with <tt class="docutils literal">transport.write</tt> to arrive at the other side of the connection?</a></h3>
+<p>Twisted TCP, UDP, and SSL transports don't buffer data before sending it.  When you write data to a connection, it should show up on the other side as quickly as the network is capable of transporting it there. However, a couple things may prevent this from happening:</p>
+<ul class="simple">
+<li>Twisted can only send data after you give up control of execution to the reactor.  For example, if you have an infinite loop writing data to a transport, the data will never actually be sent since control will never leave your code and return to the reactor.</li>
+<li>Twisted APIs are largely not threadsafe.  If you call <tt class="docutils literal">transport.write</tt> from a thread other than the reactor thread, the behavior is undefined.  This may manifest as very long delivery times, or deliveries that don't succeed until another unrelated event occurs in the system.  To use Twisted APIs from a non-reactor thread, see the documentation for <tt class="docutils literal">reactor.callFromThread</tt>.</li>
+</ul>
+<p>If your program appears to send messages as expected, it might be possible that the sending program is working as expected but the receiving program is buffering the messages. Eg: your messages are buffered by a web browser, and you don't close your message. Use telnet instead. Especially as a beginner, never forget that you can only see messages indirectly through the eyes of another program. Check your receiving program!</p>
+</div>
+<div class="section" id="how-do-i-use-deferreds-to-make-my-blocking-code-non-blocking">
+<h3><a class="toc-backref" href="#id30">How do I use Deferreds to make my blocking code non-blocking?</a></h3>
+<p>You don't. Deferreds don't magically turn a blocking function call into a non-blocking one. A Deferred is just a simple object that represents a deferred result, with methods to allow convenient adding of callbacks. (This is a common misunderstanding; suggestions on how to make this clearer in the <a class="reference external" href="http://twistedmatrix.com/documents/current/core/howto/defer.html">Deferred Execution</a> howto are welcome!)</p>
+<p>If you have blocking code that you want to use non-blockingly in Twisted, either rewrite it to be non-blocking, or run it in a thread. There is a convenience function, <a class="reference external" href="http://twistedmatrix.com/documents/current/api/twisted.internet.threads.deferToThread.html">deferToThread</a>, to help you with the threaded approach -- but be sure to read <a class="reference external" href="http://twistedmatrix.com/documents/current/core/howto/threading.html">Using Threads in Twisted</a>.</p>
+</div>
+<div class="section" id="i-get-exceptions-valueerror-signal-only-works-in-main-thread-when-i-try-to-run-my-twisted-program-what-s-wrong">
+<h3><a class="toc-backref" href="#id31">I get <tt class="docutils literal">exceptions.ValueError: signal only works in main thread</tt> when I try to run my Twisted program! What's wrong?</a></h3>
+<p>The default reactor, by default, will install signal handlers to catch events like Ctrl-C, <tt class="docutils literal">SIGTERM</tt> and so on. However, you can't install signal handlers from non-main threads in Python, which means that <tt class="docutils literal">reactor.run()</tt> will cause an error. Pass the <tt class="docutils literal">installSignalHandlers=0</tt> keyword argument to <tt class="docutils literal">reactor.run</tt> to work around this.</p>
+</div>
+<div class="section" id="i-m-trying-to-stop-my-program-with-sys-exit-but-twisted-seems-to-catch-it-how-do-i-exit-my-program">
+<h3><a class="toc-backref" href="#id32">I'm trying to stop my program with sys.exit(), but Twisted seems to catch it! How do I exit my program?</a></h3>
+<p>Use <tt class="docutils literal">reactor.stop()</tt> instead. This will cleanly shutdown the reactor.</p>
+</div>
+<div class="section" id="how-do-i-find-out-the-ip-address-of-the-other-end-of-my-connection">
+<h3><a class="toc-backref" href="#id33">How do I find out the IP address of the other end of my connection?</a></h3>
+<p>The <tt class="docutils literal">.transport</tt> object (which implements the <a class="reference external" href="http://twistedmatrix.com/documents/current/api/twisted.internet.interfaces.ITransport.html">ITransport</a> interface) offers a pair of methods named <a class="reference external" href="http://twistedmatrix.com/documents/current/api/twisted.internet.interfaces.ITransport.getPeer.html">getPeer</a> and <a class="reference external" href="http://twistedmatrix.com/documents/current/api/twisted.internet.interfaces.ITransport.getHost.html">getHost</a>. <tt class="docutils literal">getPeer</tt> will give you a tuple that describes the address of the system at the other end of the connection. For example:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyProtocol</span><span class="p">(</span><span class="n">protocol</span><span class="o">.</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">connectionMade</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span> <span class="s2">&quot;connection from&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">getPeer</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="why-don-t-twisted-s-network-methods-support-unicode-objects-as-well-as-strings">
+<h3><a class="toc-backref" href="#id34">Why don't Twisted's network methods support Unicode objects as well as strings?</a></h3>
+<p>In general, such methods (e.g. <a class="reference external" href="http://twistedmatrix.com/documents/current/api/twisted.internet.abstract.FileDescriptor.html">FileDescriptor</a> 's write) are designed to send bytes over the network. These methods use non-Unicode string objects as a container for the bytes that they send and receive.</p>
+<p>Unicode objects are not byte-based and are an abstraction used for representing strings of human readable text. In order to send Unicode strings using these methods, you should explicitly specify a byte-based encoding for them, for example: <tt class="docutils literal"><span class="pre">s.encode(&quot;utf-8&quot;)</span></tt> and explicitly decode them at the receiving end.</p>
+<p>Twisted cannot choose an encoding for you at this level: your encoding choice will be protocol specific and may need to be specified in the message you send (for example, HTTP headers include a encoding specification).</p>
+<p>For a more complete discussion of the distinction between Unicode strings and specific encodings of Unicode strings, see the following articles:</p>
+<ul class="simple">
+<li>Glyph's <a class="reference external" href="http://twistedmatrix.com/pipermail/twisted-python/2005-October/011573.html">Implicit encoding is bad example</a></li>
+<li>Dan Sugalski's <a class="reference external" href="http://www.sidhe.org/~dan/blog/archives/000255.html">What the heck is: A string;</a></li>
+<li>Joel Spolsky's <a class="reference external" href="http://www.joelonsoftware.com/articles/Unicode.html">The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)</a>.</li>
+</ul>
+</div>
+<div class="section" id="why-do-i-get-a-permission-denied-error-trying-to-write-site-packages-twisted-plugins-dropin-cache-new-when-i-use-twistd-or-trial-or-some-other-twisted-program">
+<h3><a class="toc-backref" href="#id35">Why do I get a <em>Permission denied</em> error trying to write <cite>.../site-packages/twisted/plugins/dropin.cache.new</cite> when I use <tt class="docutils literal">twistd</tt> or <tt class="docutils literal">trial</tt> or some other Twisted program?</a></h3>
+<p>Twisted's plugin system uses certain cache files to improve performance.  These cache files are automatically updated as necessary.  However, when a Twisted installation is used by processes without write permission to it (as is commonly the case for a site-wide installation), if this cache file is not up to date, attempts to rewrite it will result in this error.  The solution is for the administrator (whoever performed the site install) to generate the cache.  See the <a class="reference external" href="http://twistedmatrix.com/projects/core/documentation/howto/plugin.html#auto3">Plugin Caching</a> section of the plugin documentation for details on how to regenerate this cache.</p>
+</div>
+<div class="section" id="why-can-t-the-twisted-s-reactor-be-restarted">
+<h3><a class="toc-backref" href="#id36">Why can't the Twisted's reactor be restarted?</a></h3>
+<p>There is no interesting reason. This is mainly a limitation of the current implementation, and a lack of interest on this particular feature. It's just a matter of someone spending the time on it.</p>
+</div>
+<div class="section" id="what-s-the-best-way-of-integrating-twisted-with-pygame">
+<h3><a class="toc-backref" href="#id37">What's the best way of integrating Twisted with pygame?</a></h3>
+<p>Take a look at <a class="reference external" href="https://launchpad.net/game">game</a> to see an example of the world's best practice for integrating pygame and Twisted.</p>
+</div>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id38">Perspective Broker</a></h2>
+<div class="section" id="how-can-i-get-the-reference-to-a-client-from-a-perspective">
+<h3><a class="toc-backref" href="#id39">How can I get the reference to a client from a Perspective?</a></h3>
+<p>Firstly, the client must send a reference when it connects to the perspective broker. This can be done by passing the reference as a parameter to <a class="reference external" href="http://twistedmatrix.com/documents/current/api/twisted.spread.pb.connect.html">pb.connect</a>.</p>
+<p>At the server end, you must override the <a class="reference external" href="http://twistedmatrix.com/documents/current/api/twisted.spread.pb.Perspective.attach.html">Perspective.attach</a>, which is called when a client attaches to a perspective. The first argument of this method is a remote reference to the client object that was passed to <a class="reference external" href="http://twistedmatrix.com/documents/current/api/twisted.spread.pb.connect.html">pb.connect</a>.</p>
+<p>Note that a single perspective can have many attached clients. For further information, see <a class="reference external" href="http://twistedmatrix.com/documents/current/core/howto/pclients.html">Managing Clients of Perspectives</a> HOWTO and the <a class="reference external" href="http://twistedmatrix.com/documents/current/api/twisted.spread.pb.html">twisted.spread.pb</a> API docs.</p>
+</div>
+</div>
+<div class="section" id="requests-and-contributing">
+<h2><a class="toc-backref" href="#id40">Requests and Contributing</a></h2>
+<div class="section" id="twisted-is-cool-but-i-need-to-add-more-functionality">
+<h3><a class="toc-backref" href="#id41">Twisted is cool, but I need to add more functionality.</a></h3>
+<p>Great! Read <a class="reference external" href="https://twisted.org/pages/Documentation.html">our docs</a>, and if you're feeling generous, contribute patches.</p>
+</div>
+<div class="section" id="i-have-a-patch-how-do-i-maximize-the-chances-the-twisted-developers-will-include-it">
+<h3><a class="toc-backref" href="#id42">I have a patch. How do I maximize the chances the Twisted developers will include it?</a></h3>
+<p>There are several steps you can take to increase the chances of inclusion into Twisted:</p>
+<ol class="arabic simple">
+<li>Be sure you have read and are familiar with the information and linked material <a class="reference external" href="{filename}/pages/TwistedDevelopment.rst">here</a> and <a class="reference external" href="https://twisted.org/pages/ContributingToTwisted.html">here</a>.</li>
+<li><a class="reference external" href="http://twistedmatrix.com/fixme/trac/newticket">Open a ticket</a> for the feature you wish to add.</li>
+<li>Get feedback from others on your ideas and thoughts.</li>
+<li>Write <tt class="docutils literal">trial</tt> tests for your code!</li>
+<li>When providing a patch, use unified <tt class="docutils literal">diff</tt> Either use <tt class="docutils literal">svn diff</tt> or, better yet, make a clean checkout and use <tt class="docutils literal">diff <span class="pre">-urN</span></tt> between them. Make sure your patch applies cleanly.</li>
+<li>If you post the patch to the mailing list, make sure it is inlined and without any word wrapping.</li>
+</ol>
+</div>
+<div class="section" id="and-to-whom-do-i-send-it">
+<h3><a class="toc-backref" href="#id43">And to whom do I send it?</a></h3>
+<p><a class="reference external" href="http://twistedmatrix.com/fixme/trac/newticket">Open a ticket</a> , and if it's an urgent or important issue you may want to tell the <a class="reference external" href="http://twistedmatrix.com/cgi-bin/mailman/listinfo/twisted-python">mailing list</a> about the issue you added.</p>
+</div>
+<div class="section" id="my-company-would-love-to-use-twisted-but-it-s-missing-feature-x-can-you-implement-it">
+<h3><a class="toc-backref" href="#id44">My company would love to use Twisted, but it's missing feature X, can you implement it?</a></h3>
+<p>You have 3 options:</p>
+<ol class="arabic simple">
+<li>Pay one of the Twisted developers to implement the feature.</li>
+<li>Implement the feature yourself.</li>
+<li>Add a feature request to our bug tracker. We will try to implement the feature, but there are no guarantees when and if this will happen.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="documentation">
+<h2><a class="toc-backref" href="#id45">Documentation</a></h2>
+<div class="section" id="twisted-really-needs-documentation-for-x-y-or-z-how-come-it-s-not-documented">
+<h3><a class="toc-backref" href="#id46">Twisted really needs documentation for X, Y or Z - how come it's not documented?.</a></h3>
+<p>Twisted's documentation is a work in progress, and one that we would appreciate assistance with. If you notice a gap or flaw in the documentation, please file a bug in the <a class="reference external" href="http://twistedmatrix.com/trac/report">Twisted Issue tracker</a> and mark it as having topic 'documentation'. Patches appreciated. Unit tests even more so.</p>
+</div>
+</div>
+<div class="section" id="communicating-with-us">
+<h2><a class="toc-backref" href="#id47">Communicating with us</a></h2>
+<div class="section" id="there-s-a-bug-in-twisted-where-do-i-report-it">
+<h3><a class="toc-backref" href="#id48">There's a bug in Twisted. Where do I report it?</a></h3>
+<p>Unless it is a show-stopper bug, we usually won't roll out a new release with a fix it if it's already fixed in <a class="reference external" href="https://github.com/twisted/twisted">Git</a>, so check if it is fixed there. If it is not fixed in Git, you should add it to the <a class="reference external" href="http://twistedmatrix.com/trac/newticket">issue tracker</a>, including pertinent information about the bug (hopefully as much information needed to reproduce it: OS, Git versions of any important files, Python version, code you wrote or things you did to trigger the bug, etc. If the bug appears to be severe, you should also raise it on the <a class="reference external" href="http://twistedmatrix.com/cgi-bin/mailman/listinfo/twisted-python">mailing list</a>, with a pointer to the issue already filed in the bug tracker.</p>
+</div>
+<div class="section" id="where-do-i-go-for-help">
+<h3><a class="toc-backref" href="#id49">Where do I go for help?</a></h3>
+<p>Ask for help <a class="reference external" href="https://twisted.org/pages/TwistedCommunity.html">where the Twisted team hangs out</a>.</p>
+</div>
+<div class="section" id="how-do-i-e-mail-a-twisted-developer">
+<h3><a class="toc-backref" href="#id50">How do I e-mail a Twisted developer?</a></h3>
+<p>First, note that in many cases this is the wrong thing to do: if you have a question about a part of Twisted, it's usually better to e-mail the mailing list. However, the preferred e-mail addresses for all Twisted developers are listed in the CREDITS file in the Subversion repository.</p>
+</div>
+</div>
+
+        </div>
+        </div>
+        </div>
+<div class="sphinxsidebar">
+<div class="sphinxsidebarwrapper">
+</div>
+</div>    </div>
+
+    </section>
+
+        <div id="footer"><hr>
+                <div> </div>
+                <p class="left2">
+        Copyright 2021, Twisted Matrix Labs. Ver 21.2.0. Built on 2021-02-28.<br />
+        Site design<br />
+        By <a href="http://huw.ugbox.net/">huw.wilkins.</a>
+
+                </p>
+                <p class="right"></p>
+        </div>
+
+
+</body>
+</html>
