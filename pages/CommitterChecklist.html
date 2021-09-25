@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>Test Twisted Trac Wiki - Committer Checklist</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+
+        <meta name="Description" content="An event-driven networking engine written in Python and MIT licensed." />
+
+        <link rel="stylesheet" type="text/css" href="https://twisted.org/theme/css/twistedtrac.css" />
+
+
+</head>
+
+<body>
+        <div id="banner">
+                <div id="top_grad"></div>
+                <div id="tab">
+                        <a href="https://twistedmatrix.com/trac/wiki">HOME</a>
+                        <a href="https://twistedmatrix.com/trac/wiki/FrequentlyAskedQuestions">FAQ</a>
+                        <a href="/">DOCS</a>
+                        <a href="https://twistedmatrix.com/trac/wiki/Downloads">DOWNLOAD</a>
+                </div>
+
+                <div id="header">
+                        <a id="logo" href="https://twisted.org/"><img src="https://twisted.org/theme/images/trac_banner.png" alt="Twisted" /></a>
+                </div>
+        </div>
+
+<div id="mainnav" class="related">
+	<ul>
+		<li><a href="https://twisted.org">Twisted 21.2.0 documentation</a> »</li>
+	</ul>
+</div>
+        <div id="ctxtnav" class="nav">
+        </div>
+
+    <section>
+
+    <div class="document">
+        <div class="documentwrapper">
+        <div class="bodywrapper">
+        <h1>Committer Checklist</h1>
+        
+        <div class="entry-content">
+        <p>These are things that developers with commit access to the Twisted source repository should know.  The first list is of policy items (i.e., things you should or should not try to do).</p>
+<ol class="arabic simple">
+<li>All development is done in branches.</li>
+<li>All code committed to trunk must go through the <a class="reference external" href="https://twisted.org/pages/ReviewProcess.html">Review Process</a> .</li>
+<li>trunk commit messages must follow the format described on <a class="reference external" href="https://twisted.org/pages/ReviewProcess.html">Review Process</a> so that various pieces of automation can work.</li>
+<li>If you check in something that breaks <a class="reference external" href="http://buildbot.twistedmatrix.com/boxes-supported?branch=trunk&amp;num_builds=20">trunk</a> , revert it</li>
+<li>Everything you check in to Git is licensed under <a class="reference external" href="https://github.com/twisted/twisted/blob/trunk/LICENSE">Twisted's license</a></li>
+<li>Be in the IRC channel, at least when you're going to be committing to trunk (don't feel bad about avoiding the distraction when you're trying to get stuff done though).</li>
+<li>Have fun, but not too much.</li>
+</ol>
+<p>This second list includes various technical details about how you might go about doing Twisted development (and has overlap for organizational purposes):</p>
+<ol class="arabic simple">
+<li><dl class="first docutils">
+<dt>All development is done in branches</dt>
+<dd><ol class="first last arabic">
+<li>Branch names must follow the naming convention so that various pieces of automation can work.</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>trunk commit messages must follow the format described on <a class="reference external" href="https://twisted.org/pages/ReviewProcess.html">Review Process</a> so that various pieces of automation can work.</dt>
+<dd><ol class="first last arabic">
+<li><dl class="first docutils">
+<dt>If you check in something that breaks <a class="reference external" href="http://buildbot.twistedmatrix.com/boxes-supported?branch=trunk&amp;num_builds=20">trunk</a> , revert it</dt>
+<dd><ol class="first last arabic">
+<li><dl class="first docutils">
+<dt>If the bad revision was 07c854353d,</dt>
+<dd><ol class="first last arabic">
+<li><tt class="docutils literal">cd ~/Projects/Twisted</tt></li>
+<li><tt class="docutils literal">git revert <span class="pre">-m</span> 1 07c854353d .</tt></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li>Use &quot;Reopens ticket:NNNN&quot; in the commit message to re-open the corresponding ticket</li>
+<li>Explain what broke and how and perhaps on which platform in the commit message</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>If you need to re-merge the reverted branch, revert the reversion.</dt>
+<dd><ol class="first last arabic">
+<li>Create a new branch or merge trunk into your branch with was previously reverted.</li>
+<li>Revert again the commit containing the revert and commit the reversion: <cite>git revert REVERT-SHA</cite>.</li>
+<li>Make your changes.</li>
+<li>Push the changes for re-review</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li>If you are merging a branch into trunk, you must commit exactly the merge.  You may not make extra changes in the trunk working copy after the merge.  It's easiest to do this if you merge changes via the Github pull request UI.</li>
+</ol>
+<dl class="docutils">
+<dt>Other documents that overlap and supplement this information include:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="http://twistedmatrix.com/documents/current/core/development/policy/svn-dev.html">Working from Twisted's Code repository</a></li>
+<li><a class="reference external" href="https://twisted.org/pages/ReviewProcess.html">Review Process</a></li>
+</ul>
+</dd>
+</dl>
+
+        </div>
+        </div>
+        </div>
+<div class="sphinxsidebar">
+<div class="sphinxsidebarwrapper">
+</div>
+</div>    </div>
+
+    </section>
+
+        <div id="footer"><hr>
+                <div> </div>
+                <p class="left2">
+        Copyright 2021, Twisted Matrix Labs. Ver 21.2.0. Built on 2021-02-28.<br />
+        Site design<br />
+        By <a href="http://huw.ugbox.net/">huw.wilkins.</a>
+
+                </p>
+                <p class="right"></p>
+        </div>
+
+
+</body>
+</html>

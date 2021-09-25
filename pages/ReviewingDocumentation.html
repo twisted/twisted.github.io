@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>Test Twisted Trac Wiki - Reviewing and Adding Documentation</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+
+        <meta name="Description" content="An event-driven networking engine written in Python and MIT licensed." />
+
+        <link rel="stylesheet" type="text/css" href="https://twisted.org/theme/css/twistedtrac.css" />
+
+
+</head>
+
+<body>
+        <div id="banner">
+                <div id="top_grad"></div>
+                <div id="tab">
+                        <a href="https://twistedmatrix.com/trac/wiki">HOME</a>
+                        <a href="https://twistedmatrix.com/trac/wiki/FrequentlyAskedQuestions">FAQ</a>
+                        <a href="/">DOCS</a>
+                        <a href="https://twistedmatrix.com/trac/wiki/Downloads">DOWNLOAD</a>
+                </div>
+
+                <div id="header">
+                        <a id="logo" href="https://twisted.org/"><img src="https://twisted.org/theme/images/trac_banner.png" alt="Twisted" /></a>
+                </div>
+        </div>
+
+<div id="mainnav" class="related">
+	<ul>
+		<li><a href="https://twisted.org">Twisted 21.2.0 documentation</a> »</li>
+	</ul>
+</div>
+        <div id="ctxtnav" class="nav">
+        </div>
+
+    <section>
+
+    <div class="document">
+        <div class="documentwrapper">
+        <div class="bodywrapper">
+        <h1>Reviewing and Adding Documentation</h1>
+        
+        <div class="entry-content">
+        <p>The documentation may need help if:
+* Explanations are unclear
+* Examples don't work or have become outdated
+* The overall structure or the order in which information is presented is unintuitive
+* Examples for major concepts are missing</p>
+<p>Note that the <a class="reference external" href="https://twistedmatrix.com/documents/current/core/howto/index.html">example and howto documentation on the website</a> may be outdated, as it is only updated from trunk on releases. The <a class="reference external" href="https://twisted.readthedocs.io/en/latest/">latest build on Read the Docs reflects current trunk</a>.</p>
+<div class="section" id="editing-example-and-howto-documentation">
+<h2>Editing example and howto documentation</h2>
+<p>These narrative docs live in <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructuredText</a> (<tt class="docutils literal">.rst</tt>) files in subdirectories of <a class="reference external" href="https://github.com/twisted/twisted/tree/trunk/docs">docs/</a>. Twisted uses the document generator <a class="reference external" href="https://sphinx.readthedocs.io/en/stable/">Sphinx</a> to generate the HTML files you see on the web from these <tt class="docutils literal">.rst</tt> files. After adding your changes, it's important to review your changes for correctness and to preview how they will look on the website.</p>
+<ol class="arabic simple">
+<li>If you haven't already, <a class="reference external" href="https://twisted.org/pages/TwistedDevelopment.html#creatingyourworkenvironment">create your Twisted work environment</a>.</li>
+<li>Make sure you have the latest version of the code</li>
+<li>Edit away!</li>
+<li>Preview your changes with Sphinx</li>
+</ol>
+<p>For example, if I made changes to <cite>docs/core/howto/choosing-reactor.rst</cite>, I should</p>
+<p><tt class="docutils literal">tox <span class="pre">-e</span> narrativedocs</tt></p>
+<p>This generates <cite>docs/_build/core/howto/choosing-reactor.html</cite>, which you can view in a web browser with the command:</p>
+<p><tt class="docutils literal">python <span class="pre">-m</span> webbrowser <span class="pre">docs/_build/core/howto/choosing-reactor.html</span></tt></p>
+<p>If everything looks good, submit a patch to the <cite>.rst</cite> as described <a class="reference external" href="https://twisted.org/pages/TwistedDevelopment.html#submittingapatch">here</a>.</p>
+</div>
+<div class="section" id="editing-api-docs">
+<h2>Editing API Docs</h2>
+<p>The API docs are generated from the doc strings in the code by <a class="reference external" href="https://github.com/twisted/pydoctor">pydoctor</a> , so to update what will be displayed in the API docs just update the doc strings. After making your changes, generate a test set of API docs to preview how they will look.</p>
+<ol class="arabic simple">
+<li>If you haven't already, <a class="reference external" href="https://twisted.org/pages/TwistedDevelopment.html#creatingyourworkenvironment">create your Twisted work environment</a>.</li>
+<li>Make sure you have the latest version of the code</li>
+<li>Edit away! Be sure to adhere to the docstring guidelines in the <a class="reference external" href="https://twistedmatrix.com/documents/current/core/development/policy/">Twisted coding standard</a>.</li>
+<li>Preview your changes with pydoctor</li>
+</ol>
+<p>Generate the docs with the build-apidocs admin script like so:</p>
+<p>``
+tox -e apidocs
+``</p>
+<p>The above produces a folder called <cite>apidocs</cite> in your current working directory. You can then open the docs in a web browser with the command:</p>
+<p>``
+python -m webbrowser apidocs/index.html
+``</p>
+<p>If everything looks good, submit a patch as described [wiki:TwistedDevelopment#SubmittingaPatch here].</p>
+</div>
+<div class="section" id="more">
+<h2>More</h2>
+<p>See also <a class="reference external" href="{filename}/pages/Documentation/Analysis/DocumentationAnalysis.rst">DocumentationAnalysis</a> from an old Twisted documentation sprint.</p>
+</div>
+
+        </div>
+        </div>
+        </div>
+<div class="sphinxsidebar">
+<div class="sphinxsidebarwrapper">
+</div>
+</div>    </div>
+
+    </section>
+
+        <div id="footer"><hr>
+                <div> </div>
+                <p class="left2">
+        Copyright 2021, Twisted Matrix Labs. Ver 21.2.0. Built on 2021-02-28.<br />
+        Site design<br />
+        By <a href="http://huw.ugbox.net/">huw.wilkins.</a>
+
+                </p>
+                <p class="right"></p>
+        </div>
+
+
+</body>
+</html>
