@@ -27,6 +27,9 @@ body {
   unicode-range: U+000-5FF;
   src: url("../fonts/Inter-UI-Bold.woff2") format("woff2"), url("../fonts/Inter-UI-Bold.woff") format("woff"); }
 
+.logo {
+  height: 80px;
+}
 .display-4 {
   font-weight: 600;
 }
@@ -35,8 +38,8 @@ section {
 }
 .ribbon {
   position: absolute;
-    top: 92px;
-    right: 0;
+  top: 105px;
+  right: 0;
 }
 .bd-clipboard {
    position: relative;
