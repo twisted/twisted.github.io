@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "dev": "npx tailwindcss --output assets/css/tailwind.css --watch",
+    "build": "npx tailwindcss --output assets/css/tailwind.css --minify",
+    "echo": "echo \"Error: no test specified\" && exit 1"
+  },
+  "name": "twisted.github.io",
+  "description": "",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twisted/twisted.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/twisted/twisted.github.io/issues"
+  },
+  "homepage": "https://github.com/twisted/twisted.github.io#readme"
+}
