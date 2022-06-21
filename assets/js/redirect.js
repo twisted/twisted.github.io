@@ -17,6 +17,7 @@ if (p.match('/trac/ticket/')) {
     if(t == '') {
         t = r[r.length - 2]
     }
-    new_url = 'https://github.com/twisted/twisted-trac-migration-3/issues/' + t
-    $('#link').attr("href", new_url)
+    new_url = new_url + t
 }
+
+$('#js-link').attr("href", new_url)
