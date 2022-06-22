@@ -30,15 +30,12 @@ body {
 .logo {
   height: 80px;
 }
-.display-4 {
-  font-weight: 600;
-}
 section {
   padding: 6rem 0;
 }
 .ribbon {
   position: absolute;
-  top: 105px;
+  top: 107px;
   right: 0;
 }
 .bd-clipboard {
