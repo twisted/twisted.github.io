@@ -147,10 +147,6 @@
   display: flex
 }
 
-.tw-hidden {
-  display: none
-}
-
 .tw-h-screen {
   height: 100vh
 }
@@ -177,7 +173,7 @@
 
 .tw-bg-highlight {
   --tw-bg-opacity: 1;
-  background-color: rgb(30 126 52 / var(--tw-bg-opacity))
+  background-color: rgb(56 134 89 / var(--tw-bg-opacity))
 }
 
 .tw-p-12 {
@@ -200,7 +196,7 @@
 
 .tw-text-highlight {
   --tw-text-opacity: 1;
-  color: rgb(30 126 52 / var(--tw-text-opacity))
+  color: rgb(56 134 89 / var(--tw-text-opacity))
 }
 
 .tw-dark .dark\:tw-bg-gray-700 {

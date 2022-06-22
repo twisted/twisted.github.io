@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "dev": "npx tailwindcss --output assets/css/tailwind.css --watch",
-    "build": "npx tailwindcss --output assets/css/tailwind.css --minify",
+    "dev": "npx tailwindcss --output build/css/tailwind.css --watch",
+    "build": "npx tailwindcss --output build/css/tailwind.css --minify",
     "echo": "echo \"Error: no test specified\" && exit 1"
   },
   "name": "twisted.github.io",

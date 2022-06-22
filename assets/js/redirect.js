@@ -3,11 +3,6 @@
 Show link to redirect to correct page.
 */
 
-// JS is enbled
-$('#js-enable-js').addClass('tw-hidden')
-// Show link to page
-$('#js-redirection').removeClass('tw-hidden')
-
 var p = window.location.pathname
 var new_url = 'https://github.com/twisted/twisted-trac-migration-3/issues/'
 if (p.match('/trac/ticket/')) {
@@ -18,6 +13,5 @@ if (p.match('/trac/ticket/')) {
         t = r[r.length - 2]
     }
     new_url = new_url + t
+    window.location.href = new_url
 }
-
-$('#js-link').attr("href", new_url)
