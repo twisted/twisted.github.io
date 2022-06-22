@@ -147,6 +147,10 @@
   display: flex
 }
 
+.tw-hidden {
+  display: none
+}
+
 .tw-h-screen {
   height: 100vh
 }
