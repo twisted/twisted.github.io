@@ -30,15 +30,12 @@ body {
 .logo {
   height: 80px;
 }
-.display-4 {
-  font-weight: 600;
-}
 section {
   padding: 6rem 0;
 }
 .ribbon {
   position: absolute;
-  top: 105px;
+  top: 107px;
   right: 0;
 }
 .bd-clipboard {
@@ -126,10 +123,16 @@ pre code.hljs {
   background-color: #388659;
   border-color: #388659;
 }
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled):active {
   color: #fff;
   background-color: #2d6b47;
   border-color: #296241;
+}
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus {
+  box-shadow:  0 0 0.2rem 0.2rem rgb(45 107 71 / 50%)
 }
 .btn {
   font-weight: 600;
