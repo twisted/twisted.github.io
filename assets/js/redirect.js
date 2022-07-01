@@ -8,8 +8,7 @@ import {regex_redirects} from "./redirect_rules.mjs"
 import {migrated_tickets} from "./redirect_rules.mjs"
 
 const github = 'https://github.com/twisted'
-const github_issues = github + '/issues/'
-const html_preview_link = 'https://htmlpreview.github.io/?'
+const github_issues = github + '/twisted/issues/'
 
 var path = window.location.pathname
 var path_simple = stripTrailingSlash(path)
@@ -35,11 +34,7 @@ if (path.match('/trac/ticket/.+')) {
     }
 }
 
-to_homepage.forEach(function(p) {
-    if (path_simple.match(p)){
-        window.location = new_url
-    }
-})
+getRegexRedirectPath(regex_redirects, path_simple)
 
 new_url = getNewURL(rules, path_simple)
 if (new_url) {
@@ -48,30 +43,23 @@ if (new_url) {
 
 }
 
-getRegexRedirectPath(regex_redirects, path_simple)
-
-// https://twistedmatrix.com/documents/14.0.1/api/twisted.internet.task.LoopingCall.html#a
-// https://github.com/twisted/documents/blob/main/14.0.1/api/twisted.internet.task.LoopingCall.html#a
+to_homepage.forEach(function(p) {
+    if (path_simple.match(p)){
+        window.location = new_url
+    }
+})
 
 function getRegexRedirectPath(regex_redirects, path_simple) {
-    var new_path = '';
-
     regex_redirects.forEach(function(pair) {
         var regex_path = /pair[0]/gi
 
         if (path_simple.match(regex_path)) {
-            new_path = path_simple.replace(regex_path, pair[1])
-
-            console.log(new_path)
-
+            var new_path = path_simple.replace(regex_path, pair[1])
             new_url = github + new_path
-            if (new_path.includes('.html')) {
-                new_url = html_preview_link + new_url
-            }
-            // window.location = new_url
+
+            window.location = new_url
         }
     })
-
 }
 
 // Method to convert the Trac ID to GitHub.

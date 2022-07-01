@@ -3,12 +3,10 @@ export const to_homepage = [
     '/trac',
     '/trac/wiki',
     '/trac/wiki/WikiStart',
-    '/trac/report/',
 ];
 
 export const regex_redirects = [
-    ['/trac/report', '/twisted/issues'],
-    ['/documents', '/documents/blob/main'],
+    ['/trac/report/*', '/twisted/issues'],
 ];
 
 // Other redirect rules.
