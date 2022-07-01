@@ -34,7 +34,7 @@ if (path.match('/trac/ticket/.+')) {
     }
 }
 
-getRegexRedirectPath(regex_redirects, path_simple)
+goToRegexRedirectPath(regex_redirects, path_simple)
 
 new_url = getNewURL(rules, path_simple)
 if (new_url) {
@@ -49,14 +49,13 @@ to_homepage.forEach(function(p) {
     }
 })
 
-function getRegexRedirectPath(regex_redirects, path_simple) {
+function goToRegexRedirectPath(regex_redirects, path_simple) {
     regex_redirects.forEach(function(pair) {
-        var regex_path = /pair[0]/gi
+        var regex_path = new RegExp(pair[0], 'gi')
 
         if (path_simple.match(regex_path)) {
-            var new_path = path_simple
-            new_path.replace(regex_path, pair[1])
-            new_url = github + new_path
+
+            new_url = github + path_simple.replace(regex_path, pair[1])
 
             window.location = new_url
         }
