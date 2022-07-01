@@ -12,6 +12,8 @@ const github_issues = github + '/issues/'
 var path = window.location.pathname
 var path_simple = stripTrailingSlash(path)
 
+var new_url = ''
+
 for (p in to_homepage) {
     if (path_simple.match(p)){
         window.location = '/'
@@ -19,16 +21,16 @@ for (p in to_homepage) {
 }
 
 if (path.match('/trac/ticket/')) {
-    var new_url = github_issues
+    new_url = github_issues
     p = window.location.pathname
     var r = p.split('/')
     var trac_id = r[r.length - 1]
 
-    if(trac_id == '') {
+    if (trac_id == '') {
         trac_id = r[r.length - 2]
     }
 
-    var new_id = trac_to_github(parseInt(trac_id))
+    var new_id = getNewURL(migrated_tickets, parseInt(trac_id))
     if (new_id) {
         new_url = new_url + new_id
 
@@ -40,10 +42,15 @@ if (path.match('/trac/ticket/')) {
     }
 }
 
+new_url = getNewURL(rules, path_simple)
+if (new_url) {
+    window.location = github + new_url
+}
+
 // Method to convert the Trac ID to GitHub.
-function trac_to_github(trac_id) {
-    if (migrated_tickets.has(trac_id)) {
-        return migrated_tickets.get(trac_id)
+function getNewURL(rules, key) {
+    if (rules.has(key)) {
+        return rules.get(key)
     }
     return false
 }
