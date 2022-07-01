@@ -19,7 +19,7 @@ const regex_redirects = [
     ['.*/trac/timeline$', 'https://github.com/twisted/twisted/pulse'],
     ['.*/trac/roadmap$', 'https://github.com/twisted/twisted/milestones'],
     ['.*/trac/newticket$', 'https://github.com/twisted/twisted/issues/new'],
-    ['.*/trac/search$', 'https://github.com/twisted/twisted/issues'],
+    ['.*/trac/search.*', 'https://github.com/twisted/twisted/issues'],
     ['.*/trac/report.*', 'https://github.com/twisted/twisted/issues'],
     ['.*/trac/wiki/(.+)', 'https://github.com/twisted/trac-wiki-archive/blob/trunk/$1.mediawiki'],
 ];
