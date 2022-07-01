@@ -15,6 +15,7 @@ export const rules = new Map([
 
 export const regex_redirects = [
     ['/trac/report.*', '/twisted/issues'],
+    ['/trac/wiki/(.+)', '/trac-wiki-archive/blob/trunk/$1.mediawiki'],
 ];
 
 // Map from Trac ID to GitHub ID.

@@ -53,7 +53,6 @@ function goToRegexRedirectPath(regex_redirects, path_simple) {
         var regex_path = new RegExp(pair[0], 'gi')
 
         if (path_simple.match(regex_path)) {
-
             new_url = github + path_simple.replace(regex_path, pair[1])
             setLink(new_url)
 
