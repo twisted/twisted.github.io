@@ -8,7 +8,7 @@ export const to_homepage = [
 // Other redirect rules.
 export const rules = new Map([
     ['/trac/timeline', '/pulse'],
-    ['/trac/roadmap', '/milestones']
+    ['/trac/roadmap', '/milestones'],
     ['/trac/newticket', '/issues/new'],
     ['/trac/report', '/issues'],
     // ['/trac/report/*', '/issues'],
