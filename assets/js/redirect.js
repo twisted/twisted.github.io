@@ -54,7 +54,8 @@ function getRegexRedirectPath(regex_redirects, path_simple) {
         var regex_path = /pair[0]/gi
 
         if (path_simple.match(regex_path)) {
-            var new_path = path_simple.replace(regex_path, pair[1])
+            var new_path = path_simple
+            new_path.replace(regex_path, pair[1])
             new_url = github + new_path
 
             window.location = new_url
