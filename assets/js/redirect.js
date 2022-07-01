@@ -12,15 +12,20 @@ const github_issues = github + '/twisted/issues/'
 
 var path = window.location.pathname
 var path_simple = stripTrailingSlash(path)
-var new_url = '/';
 
+
+to_homepage.forEach(function(p) {
+    if (path_simple.match(p)){
+        window.location = '/';
+    }
+})
 
 if (path.match('/trac/ticket/.+')) {
-    new_url = github_issues
+    var new_url = github_issues
     var r = path_simple.split('/')
     var trac_id = r[r.length - 1]
 
-    var new_id = getNewURL(migrated_tickets, parseInt(trac_id))
+    var new_id = getFirstMatch(migrated_tickets, parseInt(trac_id))
 
     // #comment:2 -> #note_2
     var new_anchor = ''
@@ -34,20 +39,14 @@ if (path.match('/trac/ticket/.+')) {
     }
 }
 
-goToRegexRedirectPath(regex_redirects, path_simple)
-
-new_url = getNewURL(rules, path_simple)
+var new_url = getFirstMatch(rules, path_simple)
 if (new_url) {
     setLink(new_url)
     window.location = github + new_url
-
 }
 
-to_homepage.forEach(function(p) {
-    if (path_simple.match(p)){
-        window.location = new_url
-    }
-})
+goToRegexRedirectPath(regex_redirects, path_simple)
+
 
 function goToRegexRedirectPath(regex_redirects, path_simple) {
     regex_redirects.forEach(function(pair) {
@@ -56,14 +55,14 @@ function goToRegexRedirectPath(regex_redirects, path_simple) {
         if (path_simple.match(regex_path)) {
 
             new_url = github + path_simple.replace(regex_path, pair[1])
+            setLink(new_url)
 
             window.location = new_url
         }
     })
 }
 
-// Method to convert the Trac ID to GitHub.
-function getNewURL(rule_map, key) {
+function getFirstMatch(rule_map, key) {
     if (rule_map.has(key)) {
         return rule_map.get(key)
     }
