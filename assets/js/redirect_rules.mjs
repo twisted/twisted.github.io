@@ -1,9 +1,8 @@
-
 /*
-This files contains the mapping of Trac Ticket IDs as migrated
-to GitHub Issues ID for the tickets that don't have the same IDs.
+This file contains the mapping of Trac Ticket IDs as migrated
+to GitHub Issues ID.
 
-If an ID is not in this list, then both Trac and GitHub have same IDs.
+If an ID is not in this list, then it was not migrated.
 */
 export const migrated_tickets = new Map([
     [1741, 1741],
