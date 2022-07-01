@@ -16,13 +16,8 @@ var new_url = '/';
 
 if (path.match('/trac/ticket/.+')) {
     new_url = github_issues
-    p = window.location.pathname
-    var r = p.split('/')
+    var r = path_simple.split('/')
     var trac_id = r[r.length - 1]
-
-    if (trac_id == '') {
-        trac_id = r[r.length - 2]
-    }
 
     var new_id = getNewURL(migrated_tickets, parseInt(trac_id))
 
