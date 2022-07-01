@@ -1,27 +1,35 @@
 /*
 404 page
+
 Show link to redirect to correct page and redirect.
 */
-import {to_homepage} from "./redirect_rules.mjs"
-import {rules} from "./redirect_rules.mjs"
-import {regex_redirects} from "./redirect_rules.mjs"
+
+// This is the Trac to GitHub issues mapping.
+// Stored in a separate file for convenience.
 import {migrated_tickets} from "./redirect_rules.mjs"
 
-const github = 'https://github.com/twisted'
-const github_issues = github + '/twisted/issues/'
+// Redirection rules.
+// This is a mapping from a regex to a redirection URL.
+const regex_redirects = [
+    ['/trac$', '/'],
+    ['/trac/$', '/'],
+    ['/trac/wiki$', '/'],
+    ['/trac/wiki/$', '/'],
+    ['/trac/wiki/WikiStart$', '/'],
+    ['/trac/timeline$', 'https://github.com/twisted/twisted/pulse'],
+    ['/trac/roadmap$', 'https://github.com/twisted//twisted/milestones'],
+    ['/trac/newticket$', 'https://github.com/twisted//twisted/issues/new'],
+    ['/trac/search$', 'https://github.com/twisted//twisted/issues'],
+    ['/trac/report.*', 'https://github.com/twisted/twisted/issues'],
+    ['/trac/wiki/(.+)', 'https://github.com/twisted/trac-wiki-archive/blob/trunk/$1.mediawiki'],
+];
 
 var path = window.location.pathname
 var path_simple = stripTrailingSlash(path)
 
-
-to_homepage.forEach(function(p) {
-    if (path_simple.match(p)){
-        window.location = '/';
-    }
-})
-
 if (path.match('/trac/ticket/.+')) {
-    var new_url = github_issues
+    var gh_issues_base_url = 'https://github.com/twisted/twisted/issues/'
+
     var r = path_simple.split('/')
     var trac_id = r[r.length - 1]
 
@@ -29,21 +37,16 @@ if (path.match('/trac/ticket/.+')) {
 
     // #comment:2 -> #note_2
     var new_anchor = ''
-    var anchor = window.location.href.match(/#comment:[0-9]+/gi)[0]
-    new_anchor = '#note_' + anchor.match(/[0-9]+/)[0]
-
-    if (new_id) {
-        new_url = new_url + new_id + new_anchor
-        setLink(new_url)
-        window.location = new_url
+    var anchor = window.location.href.match(/#comment:[0-9]+/gi)
+    if (anchor) {
+        new_anchor = '#note_' + anchor[0].match(/[0-9]+/)[0]
     }
+
+    var new_url = gh_issues_base_url + new_id + new_anchor
+    setLink(new_url)
+    window.location = new_url
 }
 
-var new_url = getFirstMatch(rules, path_simple)
-if (new_url) {
-    setLink(new_url)
-    window.location = github + new_url
-}
 
 goToRegexRedirectPath(regex_redirects, path_simple)
 
@@ -53,9 +56,8 @@ function goToRegexRedirectPath(regex_redirects, path_simple) {
         var regex_path = new RegExp(pair[0], 'gi')
 
         if (path_simple.match(regex_path)) {
-            new_url = github + path_simple.replace(regex_path, pair[1])
+            new_url = path_simple.replace(regex_path, pair[1])
             setLink(new_url)
-
             window.location = new_url
         }
     })

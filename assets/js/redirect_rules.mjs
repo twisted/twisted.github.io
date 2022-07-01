@@ -1,24 +1,10 @@
-// Redirect to homepage rules.
-export const to_homepage = [
-    '/trac',
-    '/trac/wiki',
-    '/trac/wiki/WikiStart',
-];
 
-// Other redirect rules.
-export const rules = new Map([
-    ['/trac/timeline', '/twisted/pulse'],
-    ['/trac/roadmap', '/twisted/milestones'],
-    ['/trac/newticket', '/twisted/issues/new'],
-    ['/trac/search', '/twisted/issues'],
-]);
+/*
+This files contains the mapping of Trac Ticket IDs as migrated
+to GitHub Issues ID for the tickets that don't have the same IDs.
 
-export const regex_redirects = [
-    ['/trac/report.*', '/twisted/issues'],
-    ['/trac/wiki/(.+)', '/trac-wiki-archive/blob/trunk/$1.mediawiki'],
-];
-
-// Map from Trac ID to GitHub ID.
+If an ID is not in this list, then both Trac and GitHub have same IDs.
+*/
 export const migrated_tickets = new Map([
     [1741, 1741],
     [1742, 1742],
