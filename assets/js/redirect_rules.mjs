@@ -5,14 +5,18 @@ export const to_homepage = [
     '/trac/wiki/WikiStart'
 ];
 
+export const regex_redirects = new Map([
+    // ['/trac/report/*', '/twisted/issues'],
+    // ['/documents/*', '/documents'],
+]);
+
 // Other redirect rules.
 export const rules = new Map([
-    ['/trac/timeline', '/pulse'],
-    ['/trac/roadmap', '/milestones'],
-    ['/trac/newticket', '/issues/new'],
-    ['/trac/report', '/issues'],
-    // ['/trac/report/*', '/issues'],
-    ['/trac/search', '/issues'],
+    ['/trac/timeline', '/twisted/pulse'],
+    ['/trac/roadmap', '/twisted/milestones'],
+    ['/trac/newticket', '/twisted/issues/new'],
+    ['/trac/report', '/twisted/issues'],
+    ['/trac/search', '/twisted/issues'],
 ]);
 
 // Map from Trac ID to GitHub ID.

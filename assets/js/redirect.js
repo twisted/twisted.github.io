@@ -4,15 +4,17 @@ Show link to redirect to correct page and redirect.
 */
 import {to_homepage} from "./redirect_rules.mjs"
 import {rules} from "./redirect_rules.mjs"
+import {regex_redirects} from "./redirect_rules.mjs"
 import {migrated_tickets} from "./redirect_rules.mjs"
 
-const github = 'https://github.com/twisted/twisted'
+const github = 'https://github.com/twisted'
 const github_issues = github + '/issues/'
 
 var path = window.location.pathname
 var path_simple = stripTrailingSlash(path)
-
 var new_url = '/';
+
+
 
 if (path.match('/trac/ticket/.+')) {
     new_url = github_issues
@@ -21,8 +23,13 @@ if (path.match('/trac/ticket/.+')) {
 
     var new_id = getNewURL(migrated_tickets, parseInt(trac_id))
 
+    // #comment:2 -> #note_2
+    var new_anchor = ''
+    var anchor = window.location.href.match(/#comment:[0-9]+/gi)[0]
+    new_anchor = '#note_' + anchor.match(/[0-9]+/)[0]
+
     if (new_id) {
-        new_url = new_url + new_id
+        new_url = new_url + new_id + new_anchor
 
         $('#js-redirection a').text('GitHub issue')
         $('#js-redirection a').attr('href', new_url)
