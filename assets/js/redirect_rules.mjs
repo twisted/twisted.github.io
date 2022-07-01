@@ -2,13 +2,14 @@
 export const to_homepage = [
     '/trac',
     '/trac/wiki',
-    '/trac/wiki/WikiStart'
+    '/trac/wiki/WikiStart',
+    '/trac/report/',
 ];
 
-export const regex_redirects = new Map([
-    // ['/trac/report/*', '/twisted/issues'],
-    // ['/documents/*', '/documents'],
-]);
+export const regex_redirects = [
+    ['/trac/report', '/twisted/issues'],
+    ['/documents', '/documents/blob/main'],
+];
 
 // Other redirect rules.
 export const rules = new Map([
