@@ -4,9 +4,13 @@
 Show link to redirect to correct page and redirect.
 */
 
-// This is the Trac to GitHub issues mapping.
-// Stored in a separate file for convenience.
-import {migrated_tickets} from "./redirect_rules.mjs"
+(function(exports){
+
+// This is poor man's hack to have the same code available in browser and
+// nodejs without webpack or other tools.
+const redirect_trac_tickets = require(
+    './redirect_trac_tickets', 'redirect_trac_tickets')
+
 
 // Redirection rules.
 // This is a mapping from a regex to a redirection URL.
@@ -42,20 +46,16 @@ function getFirstMatch(rule_map, key) {
     return false
 }
 
-function setLink(url) {
-    $('#js-redirection a').attr('href', url)
-    $('#js-redirection').removeClass('tw-hidden')
-}
-
 const twisted_url = 'https://github.com/twisted'
 
-function getMigratedURL(old_url) {
+exports.getMigratedURL = (old_url) => {
     var ticket_regex_path = new RegExp('/trac/ticket/(.+)')
     if (old_url.match(ticket_regex_path)) {
 
         var new_url = twisted_url + '/twisted/issues/'
         var trac_id = old_url.match(ticket_regex_path)[1]
-        var new_id = getFirstMatch(migrated_tickets, parseInt(trac_id))
+        var new_id = getFirstMatch(
+            redirect_trac_tickets.trac_to_github, parseInt(trac_id))
 
         // #comment:2 -> #note_2
         var new_anchor = ''
@@ -66,19 +66,21 @@ function getMigratedURL(old_url) {
 
         if (new_id) {
             new_url = new_url + new_id + new_anchor
-            setLink(new_url)
             return new_url
         }
     }
     return getRegexRedirectPath(regex_redirects, old_url)
 }
 
-var new_url = getMigratedURL(window.location.href)
-if (new_url) {
-    setLink(new_url)
-    window.location = new_url
-}
+}(typeof exports === 'undefined' ? this.redirect = {} : exports))
 
-// To run tests:
-// import { tests } from "./test_redirect.mjs";
-// tests(getMigratedURL)
+// Run the redirection when loaded from the browser.
+if (typeof exports === 'undefined') {
+
+    var new_url = redirect.getMigratedURL(window.location.href)
+    if (new_url) {
+        document.getElementById('js-redirection-link').setAttribute('href', new_url)
+        document.getElementById('js-redirection').classList.remove('tw-hidden')
+        window.location = new_url
+    }
+}

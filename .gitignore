@@ -2,3 +2,9 @@ _site/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
+venv/
+nodeenv/
+node-env/
+node_modules/
+# We don't want to commit all the pinned dependencies.
+package-lock.json

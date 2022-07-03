@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/twisted/twisted.github.io/issues"
   },
-  "homepage": "https://github.com/twisted/twisted.github.io#readme"
+  "homepage": "https://github.com/twisted/twisted.github.io#readme",
+  "devDependencies": {
+    "jest": "^28.1.2"
+  }
 }

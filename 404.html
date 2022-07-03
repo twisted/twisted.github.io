@@ -18,7 +18,7 @@
       <h1>Page not found on this site.</h1>
       <h2 id="js-redirection" class="tw-hidden tw-font-medium">
         Redirecting to moved
-        <a href="#" class="tw-text-highlight">page</a>.
+        <a id="js-redirection-link" href="#" class="tw-text-highlight">page</a>.
       </h2>
       <h2 class="tw-font-medium tw-m-0">
         Go to
@@ -27,14 +27,15 @@
 
       <noscript>
         <h2 class="tw-font-medium">
-          Please enable JavaScript for this site to take advantage of automatic redirection.
+          You need to enable JavaScript for this site to take advantage of automatic redirection.
         </h2>
       </noscript>
     </div>
 
     <!-- Required vendor scripts (Do not remove) -->
-    <script type="text/javascript" src="/vendor/js/jquery-v3.5.1.min.js"></script>
-    <script type="module" src="/assets/js/redirect.js"></script>
+    <script type="text/javascript" src="/assets/js/node-shim.js"></script>
+    <script type="text/javascript" src="/assets/js/redirect_trac_tickets.js"></script>
+    <script type="text/javascript" src="/assets/js/redirect.js"></script>
   </body>
 
 </html>

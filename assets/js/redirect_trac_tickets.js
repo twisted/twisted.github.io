@@ -4,7 +4,9 @@ to GitHub Issues ID.
 
 If an ID is not in this list, then it was not migrated.
 */
-export const migrated_tickets = new Map([
+(function(exports){
+
+exports.trac_to_github = new Map([
     [1741, 1741],
     [1742, 1742],
     [1743, 1743],
@@ -9826,3 +9828,5 @@ export const migrated_tickets = new Map([
     [246, 11559],
     [1647, 11560],
 ]);
+
+}(typeof exports === 'undefined' ? this.redirect_trac_tickets = {} : exports))
