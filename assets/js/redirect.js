@@ -4,63 +4,39 @@
 Show link to redirect to correct page and redirect.
 */
 
-// This is the Trac to GitHub issues mapping.
-// Stored in a separate file for convenience.
-import {migrated_tickets} from "./redirect_rules.mjs"
+(function(exports){
+
+// This is poor man's hack to have the same code available in browser and
+// nodejs without webpack or other tools.
+const redirect_trac_tickets = require(
+    './redirect_trac_tickets', 'redirect_trac_tickets')
+
 
 // Redirection rules.
 // This is a mapping from a regex to a redirection URL.
 const regex_redirects = [
-    ['/trac$', '/'],
-    ['/trac/$', '/'],
-    ['/trac/wiki$', '/'],
-    ['/trac/wiki/$', '/'],
-    ['/trac/wiki/WikiStart$', '/'],
-    ['/trac/timeline$', 'https://github.com/twisted/twisted/pulse'],
-    ['/trac/roadmap$', 'https://github.com/twisted//twisted/milestones'],
-    ['/trac/newticket$', 'https://github.com/twisted//twisted/issues/new'],
-    ['/trac/search$', 'https://github.com/twisted//twisted/issues'],
-    ['/trac/report.*', 'https://github.com/twisted/twisted/issues'],
-    ['/trac/wiki/(.+)', 'https://github.com/twisted/trac-wiki-archive/blob/trunk/$1.mediawiki'],
+    ['.*/trac$', '/'],
+    ['.*/trac/$', '/'],
+    ['.*/trac/wiki$', '/'],
+    ['.*/trac/wiki/$', '/'],
+    ['.*/trac/wiki/WikiStart$', '/'],
+    ['.*/trac/timeline$', 'https://github.com/twisted/twisted/pulse'],
+    ['.*/trac/roadmap$', 'https://github.com/twisted/twisted/milestones'],
+    ['.*/trac/newticket$', 'https://github.com/twisted/twisted/issues/new'],
+    ['.*/trac/search.*', 'https://github.com/twisted/twisted/issues'],
+    ['.*/trac/report.*', 'https://github.com/twisted/twisted/issues'],
+    ['.*/trac/wiki/(.+)', 'https://github.com/twisted/trac-wiki-archive/blob/trunk/$1.mediawiki'],
 ];
 
-var path = window.location.pathname
-var path_simple = stripTrailingSlash(path)
-
-if (path.match('/trac/ticket/.+')) {
-    var gh_issues_base_url = 'https://github.com/twisted/twisted/issues/'
-
-    var r = path_simple.split('/')
-    var trac_id = r[r.length - 1]
-
-    var new_id = getFirstMatch(migrated_tickets, parseInt(trac_id))
-
-    // #comment:2 -> #note_2
-    var new_anchor = ''
-    var anchor = window.location.href.match(/#comment:[0-9]+/gi)
-    if (anchor) {
-        new_anchor = '#note_' + anchor[0].match(/[0-9]+/)[0]
-    }
-
-    var new_url = gh_issues_base_url + new_id + new_anchor
-    setLink(new_url)
-    window.location = new_url
-}
-
-
-goToRegexRedirectPath(regex_redirects, path_simple)
-
-
-function goToRegexRedirectPath(regex_redirects, path_simple) {
-    regex_redirects.forEach(function(pair) {
-        var regex_path = new RegExp(pair[0], 'gi')
-
-        if (path_simple.match(regex_path)) {
-            new_url = path_simple.replace(regex_path, pair[1])
-            setLink(new_url)
-            window.location = new_url
-        }
+function getRegexRedirectPath(regex_redirects, old_url) {
+    var matching_pair = regex_redirects.find(function(pair) {
+        var regex_path = new RegExp(pair[0])
+        return old_url.match(regex_path)
     })
+
+    if(matching_pair) {
+        return old_url.replace(new RegExp(matching_pair[0]), matching_pair[1])
+    }
 }
 
 function getFirstMatch(rule_map, key) {
@@ -70,14 +46,41 @@ function getFirstMatch(rule_map, key) {
     return false
 }
 
-function stripTrailingSlash(str) {
-    if(str.substr(-1) === '/') {
-        return str.substr(0, str.length - 1);
+const twisted_url = 'https://github.com/twisted'
+
+exports.getMigratedURL = (old_url) => {
+    var ticket_regex_path = new RegExp('/trac/ticket/(.+)')
+    if (old_url.match(ticket_regex_path)) {
+
+        var new_url = twisted_url + '/twisted/issues/'
+        var trac_id = old_url.match(ticket_regex_path)[1]
+        var new_id = getFirstMatch(
+            redirect_trac_tickets.trac_to_github, parseInt(trac_id))
+
+        // #comment:2 -> #note_2
+        var new_anchor = ''
+        var anchor = old_url.match(/#comment:[0-9]+/gi)
+        if (anchor) {
+            new_anchor = '#note_' + anchor[0].match(/[0-9]+/)[0]
+        }
+
+        if (new_id) {
+            new_url = new_url + new_id + new_anchor
+            return new_url
+        }
     }
-    return str;
+    return getRegexRedirectPath(regex_redirects, old_url)
 }
 
-function setLink(url) {
-    $('#js-redirection a').attr('href', url)
-    $('#js-redirection').removeClass('tw-hidden')
+}(typeof exports === 'undefined' ? this.redirect = {} : exports))
+
+// Run the redirection when loaded from the browser.
+if (typeof exports === 'undefined') {
+
+    var new_url = redirect.getMigratedURL(window.location.href)
+    if (new_url) {
+        document.getElementById('js-redirection-link').setAttribute('href', new_url)
+        document.getElementById('js-redirection').classList.remove('tw-hidden')
+        window.location = new_url
+    }
 }
