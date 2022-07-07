@@ -2,7 +2,7 @@
 
 Most of the content is hosted in this repository.
 
-The legacy documentation pages for the `/documets/` URL is hosted in a separate
+The legacy documentation pages for the `/documents/` URL is hosted in a separate
 repository at [twisted/documents](https://github.com/twisted/documents).
 
 
