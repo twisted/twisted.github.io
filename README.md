@@ -9,7 +9,7 @@ repository at [twisted/documents](https://github.com/twisted/documents).
 # Development of the website
 
 You can run a local test server via `$ python3 test_server.py`.
-It is designed to replicate the same 404 behavior as Github Pages.
+It is designed to replicate the same 404 behavior as GitHub Pages.
 
 
 ## Tools
