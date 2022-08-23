@@ -180,7 +180,9 @@
                 </p>
                 <pre>
                   <code class="language-python" id="server">
-from twisted.internet import protocol, reactor, endpoints
+import math
+
+from twisted.internet import protocol, endpoints, task
 
 class Echo(protocol.Protocol):
     def dataReceived(self, data):
@@ -190,8 +192,16 @@ class EchoFactory(protocol.Factory):
     def buildProtocol(self, addr):
         return Echo()
 
-endpoints.serverFromString(reactor, "tcp:1234").listen(EchoFactory())
-reactor.run()
+async def echo_server(reactor):
+    await endpoints.serverFromString(reactor, "tcp:1234").listen(EchoFactory())
+    await task.deferLater(reactor, math.inf, lambda: pass)
+    return 0
+
+def main():
+    return task.react(echo_server)
+
+if __name__ == "__main__":
+    sys.exit(main())
                   </code>
                 </pre>
                 <p>
