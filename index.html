@@ -181,24 +181,30 @@
                 <pre>
                   <code class="language-python" id="server">
 import math
+import sys
 
-from twisted.internet import protocol, endpoints, task
+from twisted.internet import endpoints, protocol, task
+
 
 class Echo(protocol.Protocol):
     def dataReceived(self, data):
         self.transport.write(data)
 
+
 class EchoFactory(protocol.Factory):
     def buildProtocol(self, addr):
         return Echo()
+
 
 async def echo_server(reactor):
     await endpoints.serverFromString(reactor, "tcp:1234").listen(EchoFactory())
     await task.deferLater(reactor, math.inf)
     return 0
 
+
 def main():
     return task.react(echo_server)
+
 
 if __name__ == "__main__":
     sys.exit(main())
