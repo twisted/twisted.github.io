@@ -194,7 +194,7 @@ class EchoFactory(protocol.Factory):
 
 async def echo_server(reactor):
     await endpoints.serverFromString(reactor, "tcp:1234").listen(EchoFactory())
-    await task.deferLater(reactor, math.inf, lambda: pass)
+    await task.deferLater(reactor, math.inf)
     return 0
 
 def main():
