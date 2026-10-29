@@ -11,6 +11,10 @@ repository at [twisted/documents](https://github.com/twisted/documents).
 You can run a local test server via `$ python3 test_server.py`.
 It is designed to replicate the same 404 behavior as GitHub Pages.
 
+## AI Policy
+
+This repo follows the [Twisted AI Policy](https://docs.twisted.org/en/latest/development/ai-policy.html). This means this project does not allow the inclusion of the outputs of generative AI tools.
+
 
 ## Tools
 
